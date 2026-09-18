@@ -1,0 +1,938 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="ru">
+
+
+<head>
+
+
+	<meta charset="utf-8"/>
+
+	<meta name="Description" content="На нашем сайте вы можете понакомиться с новым уютным рестораном в центре города Барашек. Окунитесь в тёплую атмосферу с грузинским колоритом."/>
+
+	<meta name="format-detection" content="telephone=no"/>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+
+	<link href="../favicon.ico" rel="icon" type="image/x-icon" />
+	
+
+	<link rel="stylesheet" href="../css/style.css" media="all"/>
+	<link rel="stylesheet" href="../css/media.css" media="all"/>
+
+	<script src="../lib.js"></script>
+
+	<script src="../scroll.js"></script>
+
+	<script src="../parallax.js"></script>
+
+
+	<title>Грузинская кухня в ресторане "Барашек"</title>
+
+
+<meta name="robots" content="noindex,nofollow">
+<link rel="stylesheet" href="../css/local.css">
+<script defer src="../js/local.js"></script>
+</head>
+
+
+<body class="page-about">
+
+
+	<header class="bbox">
+    <div class="menu ibm anim_header" id="menu"><i></i><i></i><i></i>
+    </div>
+    
+    <div class="header_contacts_block">
+        <div class="address ibb anim_header" id="address"><address>Ставрополь</address>
+        </div>
+        <div class="telephone ibb tar anim_header" id="telephone">Дизайн-макет<br><a href="#demo-notice" data-demo>Демо-режим</a></div>
+    </div>
+    <div class="loader anim_header"></div>
+    <div class="menu_page_wrapper">
+        <div class="menu_page" id="menu_page">
+            <div class="helper"></div>
+            <nav class="ibm"> 
+				<a href="../index.html">Барашек</a> 
+				<a href="../menu/index.html">Меню</a> 
+				<a href="../dostavka_edy/index.html">Доставка</a>
+                <a href="index.html">О ресторане</a>
+                <a href="../alazani/index.html">Банкетный зал</a>
+                <a href="../news/index.html">События</a>
+				<a href="../contacts/index.html">Контакты</a> 
+				<a target="_blank" href="../gallery/index.html">Фотогалерея</a> 
+			</nav>
+            <div class="ibm anim_header">
+                <a class="privacy-policy privacy-policy_mobile anim_header" href="../information/index.html" target="_blank"><span>Политика<br/>конфиденциальности</span></a>
+            </div>
+        </div>
+    </div>
+</header>
+<script>
+    /* меню сайта ====================================================== */
+    function openMenu() {
+        var menuPage = document.querySelector(".menu_page");
+        var menu = document.querySelector(".menu");
+        window.body = document.body;
+        var status = false;
+        var timer;
+        function action() {
+            if (!status) {
+                clearTimeout(timer);
+                addClass(body, "menu_opened");
+                status = true;
+                timer = setTimeout(function() {
+                    menuPage.style.overflowY = "auto";
+                }, 600);
+            } else {
+                clearTimeout(timer);
+                removeClass(body, "menu_opened");
+                status = false;
+                menuPage.style.overflowY = "hidden";
+            }
+        }
+        menu.addEventListener('click', action, false);
+    }
+    window.addEventListener("load", openMenu, false); /* Анимация затемненения при переходе по ссылкам ================== */
+    window.addEventListener("click", function(e) {
+        var a = e.target.closest ? e.target.closest("a") : null;
+        if (!a) return;
+        var href = a.getAttribute("href") || "";
+        if (a.target === "_blank") return;
+        if (/^(tel:|mailto:|javascript:|#)/i.test(href)) return;
+        addClass(body, "changing_page");
+    }, false);
+</script>
+
+
+
+
+<main>
+
+		<section class="one">
+
+			<div class="shadow"></div>
+			<div class="part1 origin" id="part1"><div class="gradient1"></div><img src="../images/test_about.jpg"></div>
+			<div class="part2 origin" id="part5"><div class="gradient2"></div><img src="../images/about2.jpg"></div>
+			<div class="part3 origin" id="part9"><div class="gradient3"></div><img src="../images/about4.jpg"></div>
+
+		</section>
+		
+		
+
+		<section class="two">
+
+			<div class="shadow"></div>
+
+			<div class="part1 origin " id="part2">
+
+				<img src="../images/test_about.jpg">
+
+				<div class="part_text_left">
+
+					<div class="ibm">
+
+						<a target="_blank" href="../gallery/index.html" class="board ibm tac">3d тур<br><span>по лавашу</span></a><br>
+						<div class="dotted_line"></div>
+						<h1>Маленькая грузия</h1>
+						<h2>В уютном ресторане на 100 человек</h2>
+						<div class="dotted_line"></div>
+
+					</div><div class="helper"></div>
+
+				</div>
+
+				<div class="gradient1"></div>
+
+			</div>
+
+			<div class="part2 origin" id="part6">
+
+				<img src="../images/about2.jpg">
+				<div class="gradient2"></div>
+
+				<div class="part_text_left">
+
+					<div class="ibm">
+
+						<a href="../menu/index.html" class="board ibm tac">Посмотреть<br><span>меню на сайте</span></a><br>
+						<div class="dotted_line"></div>
+						<h1>Грузинская кухня</h1>
+						<h2>это не только хинкали</h2>
+						<div class="dotted_line"></div>
+
+					</div><div class="helper"></div>
+
+				</div>
+
+			</div>
+
+			<div class="part3 origin" id="part10">
+
+				<img src="../images/about4.jpg">
+				<div class="gradient3"></div>
+
+				<div class="part_text_left">
+
+					<div class="ibm">
+
+						<a class="board ibm tac">Особая<br><span>атмосфера</span></a><br>
+						<div class="dotted_line"></div>
+						<h1>Кавказские традиции</h1>
+						<h2>тепло и уют для каждого гостя</h2>
+						<div class="dotted_line"></div>
+
+					</div><div class="helper"></div>
+
+				</div>
+
+			</div>
+
+		</section>
+
+		
+		
+		<section class="three">
+
+			<div class="shadow"></div>
+			<div class="part1 origin" id="part3">
+
+				<img src="../images/test_about.jpg">
+
+				<div class="part_text_right">
+
+					<div class="ibm">
+
+						<a target="_blank" href="../gallery/index.html" class="board ibm tac">3d тур<br><span>по лавашу</span></a><br>
+						<div class="dotted_line"></div>
+						<h1>Маленькая грузия</h1>
+						<h2>В уютном ресторане на 100 человек</h2>
+						<div class="dotted_line"></div>
+
+					</div><div class="helper"></div>
+
+				</div>
+
+				<div class="gradient1"></div>
+
+			</div>
+
+			<div class="part2 origin" id="part7">
+
+				<img src="../images/about2.jpg">
+				<div class="gradient2"></div>
+
+				<div class="part_text_right">
+
+					<div class="ibm">
+
+						<a href="../menu/index.html" class="board ibm tac">Посмотреть<br><span>меню на сайте</span></a><br>
+						<div class="dotted_line"></div>
+						<h1>Грузинская кухня</h1>
+						<h2>это не только хинкали</h2>
+						<div class="dotted_line"></div>
+					</div><div class="helper"></div>
+
+				</div>
+
+			</div>
+
+			<div class="part3 origin" id="part11">
+
+				<img src="../images/about4.jpg">
+				<div class="gradient3"></div>
+
+				<div class="part_text_right">
+
+					<div class="ibm">
+
+						<a class="board ibm tac">Особая<br><span>атмосфера</span></a><br>
+						<div class="dotted_line"></div>
+						<h1>Кавказские традиции</h1>
+						<h2>тепло и уют для каждого гостя</h2>
+						<div class="dotted_line"></div>
+
+					</div><div class="helper"></div>
+
+				</div>
+
+			</div>
+
+		</section>
+		
+		
+
+		<section class="four">
+
+			<div class="shadow"></div>
+			<div class="part1 origin" id="part4"><img src="../images/test_about.jpg"><div class="gradient1"></div></div>
+			<div class="part2 origin" id="part8"><img src="../images/about2.jpg"><div class="gradient2"></div></div>
+			<div class="part3 origin" id="part12"><img src="../images/about4.jpg"><div class="gradient3"></div></div>
+
+		</section>
+		
+		
+
+		<div class="social_section">
+
+			<div class="part_text">
+
+				<div class="ibm">
+
+					<h1>Приезжайте к нам</h1>
+					<h2>и окунитесь в эту атмосферу</h2>
+					<div class="dotted_line"></div>
+
+					<div class="social_block">
+
+						<a href="#demo-notice" data-demo class="insta" aria-label="Instagram - демо"></a>
+						<a href="#demo-notice" data-demo class="vk" aria-label="ВКонтакте - демо"></a>
+						<a href="#demo-notice" data-demo class="fb" aria-label="Facebook - демо"></a>
+						<a href="#demo-notice" data-demo class="tw" aria-label="Twitter - демо"></a>
+
+					</div>
+
+					<div class="dotted_line"></div>
+
+					<h3>Социальные сети · демо<br><b>Переходы отключены</b></h3>
+
+				</div><div class="helper"></div>
+
+			</div>
+
+		</div>
+
+	</main>
+
+
+	<div id="scroll" style="height: 6500px;"></div>
+
+
+	<div class="animate_position" id="animate_position">
+
+
+		<div class="scroll_pos">
+
+			<i></i>
+
+			<i id="scroll_pos"></i>
+
+		</div>
+
+
+		<div id="baran_right"></div>
+
+		<div id="baran_left"></div>
+
+
+	</div>
+
+
+<script>
+
+	function resizeSections(){
+		
+		var items = document.querySelectorAll("section.two .origin");
+		var socSection = document.querySelector(".social_section");
+		
+		if(no3dView){
+			
+			for(var i = 0; i < items.length; i++){
+			items[i].style.height = (document.documentElement.clientHeight*1.2)+"px";
+			}
+			socSection.style.height = (document.documentElement.clientHeight*1.2)+"px";
+			
+		}else{
+			
+			for(var i = 0; i < items.length; i++){
+			items[i].style.height = (document.documentElement.clientHeight)+"px";
+			}
+			socSection.style.height = (document.documentElement.clientHeight)+"px";
+			
+		}
+		
+		
+	}window.addEventListener("load", resizeSections, false);
+	window.addEventListener("resize", resizeSections, false);
+
+
+	// статус скролла
+	var sHeight = document.body.scrollHeight - document.documentElement.clientHeight;
+	var animatePosition = document.getElementById('animate_position');
+
+	// вспомогательные функции ==========================================
+	
+	function translateY(element,value){
+		if(supTransform == "3d"){
+			element.style[prefixes.Transform] = "translate3d(0,"+value+"px,0)";
+		}else{
+			element.style[prefixes.Transform] = "translateY("+value+"px)";
+		}
+	}
+	
+	function translateX(element,value){
+		if(supTransform == "3d"){
+			element.style[prefixes.Transform] = "translate3d("+value+"px,0,0)";
+		}else{
+			element.style[prefixes.Transform] = "translateX("+value+"px)";
+		}
+	}
+	
+	// бег барана ======================================================
+	
+	function animateScroll(scroll) {
+		
+		var sPos = document.getElementById('scroll_pos');
+		var bLeft = document.getElementById('baran_left');
+		var bRight = document.getElementById('baran_right');
+		sPos.style.width = animatePosition.offsetWidth / sHeight * scroll + 'px';
+		
+		if(scroll == 0 || scroll == sHeight) animatePosition.style.opacity = 0;
+		else animatePosition.style.opacity = 1;
+
+		if(Parallax.prototype.getScrollDirection() == 'down') {
+
+			bLeft.style.backgroundPosition = 0 + ' ' + -Math.floor(scroll/45)*50 +'px';
+			translateX(bLeft,animatePosition.offsetWidth / sHeight * scroll);
+			bLeft.style.opacity = 1;
+			bRight.style.opacity = 0;
+
+		}else {
+
+			bRight.style.opacity = 1;
+			bRight.style.backgroundPosition = 0 + ' ' + Math.floor(scroll/45)*50 +'px';
+			translateX(bRight,-(animatePosition.offsetWidth - animatePosition.offsetWidth / sHeight * scroll));
+			bLeft.style.opacity = 0;
+			
+		}
+	}
+
+
+	//resize картинок ==================================================
+	
+	function imgResize() {
+
+		var images = document.querySelectorAll('.origin img');
+
+		for(var i = 0; i < images.length; i++){
+
+			if(images[i].offsetHeight < images[i].parentNode.offsetHeight) {
+
+				images[i].style.width = 'auto';
+				images[i].style.top = 0;
+				if(!no3dView){
+					images[i].style.height = document.documentElement.clientHeight + 'px';
+				}else{
+					images[i].style.height = (document.documentElement.clientHeight*1.2) + 'px';
+				}
+
+			}else{
+				
+				if(!no3dView){
+					images[i].style.top = -(images[i].offsetHeight/2 - document.documentElement.clientHeight/2) + 'px';
+				}else{
+					images[i].style.top = 0;
+				}
+				
+			}
+
+			if(images[i].offsetWidth < document.body.offsetWidth) {
+
+				if(!no3dView){
+					
+						images[i].style.top = -(images[i].offsetHeight/2 - document.documentElement.clientHeight/2) + 'px';
+						
+				}else{
+					
+						images[i].style.top = 0;
+				}
+				
+				images[i].style.width = document.body.offsetWidth + 'px';
+				images[i].style[prefixes.Transform] = '(0,0)';
+				images[i].style.height = 'auto';
+
+
+			}else {
+
+				images[i].style[prefixes.Transform] = 'translate('+ -(images[i].offsetWidth/2 - document.body.offsetWidth/2) +'px,0)';
+			}
+		}
+	}
+	window.addEventListener('load', imgResize, false);
+	window.addEventListener('resize', imgResize, false);
+
+	//=================================================================
+	
+	function rotateIt() {
+
+		var parts = document.getElementsByClassName('origin');
+		var sections = document.getElementsByTagName('section');
+
+		for(i = 0; i < parts.length; i++) {
+
+			parts[i].style.transformOrigin = '50% ' + '50% ' + (Math.ceil(-parts[i].offsetWidth / Math.tan(Math.PI/3) / 2)) + 'px';
+
+		}
+
+		for(i2 = 0; i2 < sections.length; i2++) {
+
+			sections[i2].style.transform = 'perspective(2500px) translate3d(0,0,'+ (-Math.ceil(sections[i2].offsetWidth / Math.tan(Math.PI/3) / 2) + 8) +'px';
+
+		}
+
+	}
+	window.addEventListener('load', rotateIt, false);
+	window.addEventListener('resize', rotateIt, false);
+
+
+	
+
+	function getTriangleFunc(num, deg) {
+		
+		if(no3dView){return;}
+
+		var section = document.getElementsByTagName('section')[num];
+		var shadow = document.getElementsByClassName('shadow')[num];
+		var part1 = document.getElementsByClassName('part1')[num];
+		var part2 = document.getElementsByClassName('part2')[num];
+		var part3 = document.getElementsByClassName('part3')[num];
+		var gradient1 = document.getElementsByClassName('gradient1')[num];
+		var gradient2 = document.getElementsByClassName('gradient2')[num];
+		var gradient3 = document.getElementsByClassName('gradient3')[num];
+
+		return function (scroll) {
+
+			if(no3dView){return;}
+		
+			if(scroll == 100 || scroll == 0) {
+
+				section.style.zIndex = 1;
+				shadow.style.display = 'none';
+
+			}else{
+
+				section.style.zIndex = 0;
+				shadow.style.display = 'block';
+				
+				if(scroll >= 50) shadow.style.opacity = 1 - scroll/100;
+				else shadow.style.opacity = scroll/100;
+
+			}
+
+			part1.style[prefixes.Transform] = 'perspective(2500px) rotate3d(0,1,0,'+ (scroll*1.2 + deg) +'deg)';
+			
+			gradient1.style.backgroundColor = 'rgba(0,0,0,'+ scroll/100 +')';
+
+			part2.style[prefixes.Transform] = 'perspective(2500px) rotate3d(0,1,0,'+ (scroll*1.2 - 120 + deg) +'deg)';
+
+			if(deg == 0) gradient2.style.backgroundColor = 'rgba(0,0,0,'+ (1 - scroll/100) +')';
+
+			else gradient2.style.backgroundColor = 'rgba(0,0,0,'+ scroll/100 +')';
+
+			part3.style[prefixes.Transform] = 'perspective(2500px) rotate3d(0,1,0,'+ (scroll*1.2 - 240 + deg) +'deg)';
+
+			gradient3.style.backgroundColor = 'rgba(0,0,0,'+ (1 - scroll/100) +')';
+
+			document.getElementsByClassName('social_section')[0].style.display = 'none';
+
+		}
+	}
+
+	//параллакс
+
+	var parallaxArray = {
+
+		0: {//первый поворот
+			start: 0,
+			end: 250,
+			timing: 'ease-in-out',
+			func: getTriangleFunc(0,0)
+
+		},
+
+		1: {
+			start: 125,
+			end: 375,
+			timing: 'ease-in-out',
+			func: getTriangleFunc(1,0)
+		},
+
+		2: {
+			start: 250,
+			end: 500,
+			timing: 'ease-in-out',
+			func: getTriangleFunc(2,0)
+		},
+
+		3: {
+			start: 375,
+			end: 750,
+			timing: 'ease-in-out',
+			func: getTriangleFunc(3,0)
+		},
+
+		4: {//второй поворот
+			start: 850,
+			end: 1100,
+			timing: 'ease-in-out',
+			func: getTriangleFunc(0,120)
+		},
+
+		5: {
+			start: 975,
+			end: 1225,
+			timing: 'ease-in-out',
+			func: getTriangleFunc(1,120)
+		},
+
+		6: {
+			start: 1100,
+			end: 1350,
+			timing: 'ease-in-out',
+			func: getTriangleFunc(2,120)
+		},
+
+		7: {
+			start: 1275,
+			end: 1525,
+			timing: 'ease-in-out',
+			func: getTriangleFunc(3,120)
+		},
+
+		8: {
+			parent: 7,
+			pause: 100,
+			duration: 1000,
+			timing: 'ease-in-out',
+
+			func: function(scroll) {
+
+				if(no3dView){return;}
+			
+				document.getElementsByClassName('social_section')[0].style.display = 'block';
+
+				document.getElementsByClassName('social_section')[0].style[prefixes.Transform] = 'translate3d(0,0,0) scale3d('+ (0.5 + scroll/200) +','+ (0.5 + scroll/200) +',1)';
+
+				document.getElementsByTagName('section')[0].style[prefixes.Transform] = 'perspective(2500px) translate3d('+ -scroll*4.5 +'%,0,'+ (-Math.ceil(document.getElementsByTagName('section')[0].offsetWidth / Math.tan(Math.PI/3) / 2) + 8) +'px)';
+
+				document.getElementsByTagName('section')[1].style[prefixes.Transform] = 'perspective(2500px) translate3d('+ -scroll*2.1 +'%,0,'+ (-Math.ceil(document.getElementsByTagName('section')[0].offsetWidth / Math.tan(Math.PI/3) / 2) + 8) +'px)';
+
+				document.getElementsByTagName('section')[2].style[prefixes.Transform] = 'perspective(2500px) translate3d('+ scroll*2.1 +'%,0,'+ (-Math.ceil(document.getElementsByTagName('section')[0].offsetWidth / Math.tan(Math.PI/3) / 2) + 8) +'px)';
+
+				document.getElementsByTagName('section')[3].style[prefixes.Transform] = 'perspective(2500px) translate3d('+ scroll*4.5 +'%,0,'+ (-Math.ceil(document.getElementsByTagName('section')[0].offsetWidth / Math.tan(Math.PI/3) / 2) + 8) +'px)';
+
+			}
+		}
+	};
+
+	var parallax = new Parallax(parallaxArray);
+	parallax.viewHeight = 2625;
+	Parallax.prototype.setEntry(animateScroll);
+	
+	//Аниция no3d ===============================================================
+	
+	function no3dAnimation(){
+		
+		function GBC(el,position){
+			return el.getBoundingClientRect()[position];
+		}
+		
+		function anm(el,y1,y2){
+			if(realScroll >=  y1 && realScroll <= y2){
+					addClass(el,"no3danim");
+			}else{
+					removeClass(el,"no3danim");
+			}
+		}
+		
+		
+		var realScroll = document.body.scrollTop || document.documentElement.scrollTop;
+		var body = document.body;
+		var docHeight = document.documentElement.clientHeight;
+		
+		
+		window.addEventListener("scroll", function(){
+			if(!no3dView){return false;}
+			realScroll = document.body.scrollTop || document.documentElement.scrollTop;
+		}, false);
+		
+		
+		function dPos(el,pos){
+			realScroll = document.body.scrollTop || document.documentElement.scrollTop;
+			if(pos === "top"){
+				return GBC(el,"top") + realScroll-docHeight+el.offsetHeight/2;
+			}else if(pos === "bottom"){
+				return GBC(el,"bottom") + realScroll-el.offsetHeight/2;
+			}
+		}
+		
+		function dPos2(el,pos){
+			realScroll = document.body.scrollTop || document.documentElement.scrollTop;
+			if(pos === "top"){
+				return GBC(el,"top") + realScroll-docHeight+el.offsetHeight;
+			}else if(pos === "bottom"){
+				return GBC(el,"bottom") + realScroll+el.offsetHeight;
+			}
+		}
+
+		//section1
+		function section1Anim(){
+			
+			var logo = document.querySelector("section.two .part1 .board");
+			var lines = document.querySelectorAll("section.two .part1 .dotted_line");
+			var h1 = document.querySelector("section.two .part1 h1");
+			var h2 = document.querySelector("section.two .part1 h2");
+			var y1,y2,y3,y4,y5,y6,y7,y8,y9,y10;
+			
+			function setValues(){
+				
+					y1=dPos2(logo,"top");
+					y2=dPos2(logo,"bottom");
+					
+					y3=dPos2(lines[0],"top");
+					y4=dPos2(lines[0],"bottom");
+					
+					y5=dPos2(h1,"top");
+					y6=dPos2(h1,"bottom");
+					
+					y7=dPos2(h2,"top");
+					y8=dPos2(h2,"bottom");
+					
+					y9=dPos2(lines[1],"top");
+					y10=dPos2(lines[1],"bottom");			
+				
+			}
+			setValues();
+			window.addEventListener("resize", setValues, false);
+			window.addEventListener("orientationchange", setValues, false);
+			
+			
+			function startAnim(){
+
+				if(!no3dView){return false;}
+				
+				//logo
+				anm(logo,y1,y2);
+				
+				//line1
+				anm(lines[0],y3,y4);
+				
+				//h1
+				anm(h1,y5,y6);
+				
+				//h2
+				anm(h2,y7,y8);
+				
+				//line2
+				anm(lines[1],y9,y10);
+				
+			}
+			startAnim();
+			window.addEventListener("scroll", startAnim, false);
+			
+		}section1Anim();
+		
+		
+		
+		//section2
+		function section2Anim(){
+			
+			var logo = document.querySelector("section.two .part2 .board");
+			var lines = document.querySelectorAll("section.two .part2 .dotted_line");
+			var h1 = document.querySelector("section.two .part2 h1");
+			var h2 = document.querySelector("section.two .part2 h2");
+			var y1,y2,y3,y4,y5,y6,y7,y8,y9,y10;
+			
+			function setValues(){
+					
+					y1=dPos(logo,"top");
+					y2=dPos(logo,"bottom");
+					
+					y3=dPos(lines[0],"top");
+					y4=dPos(lines[0],"bottom");
+					
+					y5=dPos(h1,"top");
+					y6=dPos(h1,"bottom");
+					
+					y7=dPos(h2,"top");
+					y8=dPos(h2,"bottom");
+					
+					y9=dPos(lines[1],"top");
+					y10=dPos(lines[1],"bottom");
+					
+				
+			}
+			setValues();
+			window.addEventListener("resize", setValues, false);
+			window.addEventListener("orientationchange", setValues, false);
+			
+			
+			function startAnim(){
+
+				if(!no3dView){return false;}
+				
+				//logo
+				anm(logo,y1,y2);
+				
+				//line1
+				anm(lines[0],y3,y4);
+				
+				//h1
+				anm(h1,y5,y6);
+				
+				//h2
+				anm(h2,y7,y8);
+				
+				//line2
+				anm(lines[1],y9,y10);
+				
+			}
+			startAnim();
+			window.addEventListener("scroll", startAnim, false);
+			
+		}section2Anim();
+		
+		
+		
+		//section3
+		function section3Anim(){
+			
+			var logo = document.querySelector("section.two .part3 .board");
+			var lines = document.querySelectorAll("section.two .part3 .dotted_line");
+			var h1 = document.querySelector("section.two .part3 h1");
+			var h2 = document.querySelector("section.two .part3 h2");
+			var y1,y2,y3,y4,y5,y6,y7,y8,y9,y10;
+			
+			function setValues(){
+			
+				y1=dPos(logo,"top");
+				y2=dPos(logo,"bottom");
+				
+				y3=dPos(lines[0],"top");
+				y4=dPos(lines[0],"bottom");
+				
+				y5=dPos(h1,"top");
+				y6=dPos(h1,"bottom");
+				
+				y7=dPos(h2,"top");
+				y8=dPos(h2,"bottom");
+				
+				y9=dPos(lines[1],"top");
+				y10=dPos(lines[1],"bottom");
+					
+				
+			}
+			setValues();
+			window.addEventListener("resize", setValues, false);
+			window.addEventListener("orientationchange", setValues, false);
+			
+			
+			function startAnim(){
+
+				if(!no3dView){return false;}
+				
+				//logo
+				anm(logo,y1,y2);
+				
+				//line1
+				anm(lines[0],y3,y4);
+				
+				//h1
+				anm(h1,y5,y6);
+				
+				//h2
+				anm(h2,y7,y8);
+				
+				//line2
+				anm(lines[1],y9,y10);
+				
+			}
+			startAnim();
+			window.addEventListener("scroll", startAnim, false);
+			
+		}section3Anim();
+		
+		
+		
+		//section4
+		function section4Anim(){
+			
+			var h1 = document.querySelector(".social_section h1");
+			var h2 = document.querySelector(".social_section h2");
+			var h3 = document.querySelector(".social_section h3");
+			var lines = document.querySelectorAll(".social_section .dotted_line");
+			var socBlock = document.querySelector(".social_section .social_block");
+			
+			var y1,y2,y3,y4,y5,y6,y7,y8,y9,y10,y11,y12;
+			
+			function setValues(){
+		
+				y1 = dPos(h1,"top");
+				y2 = dPos(h1,"bottom");
+				
+				y3 = dPos(h2,"top");
+				y4 = dPos(h2,"bottom");
+				
+				y5 = dPos(lines[0],"top");
+				y6 = dPos(lines[0],"bottom");
+				
+				y7 = dPos(socBlock,"top");
+				y8 = dPos(socBlock,"bottom");
+				
+				y9 = dPos(lines[1],"top");
+				y10 = dPos(lines[1],"bottom");
+				
+				y11 = dPos(h3,"top");
+				y12 = dPos(h3,"bottom");
+					
+			}
+			setValues();
+			window.addEventListener("resize", setValues, false);
+			window.addEventListener("orientationchange", setValues, false);
+			
+			
+			function startAnim(){
+
+				if(!no3dView){return false;}
+
+				//h1
+				anm(h1,y1,y2);
+				
+				//h2
+				anm(h2,y3,y4);
+				
+				//line1
+				anm(lines[0],y5,y6);
+				
+				//line1
+				anm(socBlock,y7,y8);
+				
+				//line2
+				anm(lines[1],y9,y10);
+				
+				//h3
+				anm(h3,y11,y12);
+				
+			}
+			startAnim();
+			window.addEventListener("scroll", startAnim, false);
+			
+		}section4Anim();
+		
+		
+	}
+	window.addEventListener("load", no3dAnimation, false);
+	
+
+</script>
+
+
+</body>
+
+
+</html>

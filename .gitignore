@@ -1,0 +1,11 @@
+*.zip
+*.png
+*.jpg
+*.jpeg
+*.webp
+*.pdf
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+node_modules/

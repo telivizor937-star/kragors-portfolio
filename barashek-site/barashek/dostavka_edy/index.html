@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta charset="utf-8"/>
+	<meta name="Description" content="Доставка - демонстрационный раздел макета Барашек. Ставрополь. Заказы не принимаются, доставка не осуществляется."/>
+	<meta name="format-detection" content="telephone=no"/>	
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />	
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+	<link href="../favicon.ico" rel="icon" type="image/x-icon" />
+	<link rel="stylesheet" href="../css/style.css" media="all"/>	
+	<link rel="stylesheet" href="../css/media.css" media="all"/>	
+	<script src="../scroll.js"></script>
+	<script src="../parallax.js"></script>		
+	<script src="../lib.js"></script>
+	
+	<title>Доставка еды в Ставрополе | Ресторан "Барашек"</title>
+<meta name="robots" content="noindex,nofollow">
+<link rel="stylesheet" href="../css/local.css">
+<script defer src="../js/local.js"></script>
+</head>
+<body class="delivery_page">
+	<header class="bbox">
+    <div class="menu ibm anim_header" id="menu"><i></i><i></i><i></i>
+    </div>
+    
+    <div class="header_contacts_block">
+        <div class="address ibb anim_header" id="address"><address>Ставрополь</address>
+        </div>
+        <div class="telephone ibb tar anim_header" id="telephone">Дизайн-макет<br><a href="#demo-notice" data-demo>Демо-режим</a></div>
+    </div>
+    <div class="loader anim_header"></div>
+    <div class="menu_page_wrapper">
+        <div class="menu_page" id="menu_page">
+            <div class="helper"></div>
+            <nav class="ibm"> 
+				<a href="../index.html">Барашек</a> 
+				<a href="../menu/index.html">Меню</a> 
+				<a href="index.html">Доставка</a>
+                <a href="../about/index.html">О ресторане</a>
+                <a href="../alazani/index.html">Банкетный зал</a>
+                <a href="../news/index.html">События</a>
+				<a href="../contacts/index.html">Контакты</a> 
+				<a target="_blank" href="../gallery/index.html">Фотогалерея</a> 
+			</nav>
+            <div class="ibm anim_header">
+                <a class="privacy-policy privacy-policy_mobile anim_header" href="../information/index.html" target="_blank"><span>Политика<br/>конфиденциальности</span></a>
+            </div>
+        </div>
+    </div>
+</header>
+<script>
+    /* меню сайта ====================================================== */
+    function openMenu() {
+        var menuPage = document.querySelector(".menu_page");
+        var menu = document.querySelector(".menu");
+        window.body = document.body;
+        var status = false;
+        var timer;
+        function action() {
+            if (!status) {
+                clearTimeout(timer);
+                addClass(body, "menu_opened");
+                status = true;
+                timer = setTimeout(function() {
+                    menuPage.style.overflowY = "auto";
+                }, 600);
+            } else {
+                clearTimeout(timer);
+                removeClass(body, "menu_opened");
+                status = false;
+                menuPage.style.overflowY = "hidden";
+            }
+        }
+        menu.addEventListener('click', action, false);
+    }
+    window.addEventListener("load", openMenu, false); /* Анимация затемненения при переходе по ссылкам ================== */
+    window.addEventListener("click", function(e) {
+        var a = e.target.closest ? e.target.closest("a") : null;
+        if (!a) return;
+        var href = a.getAttribute("href") || "";
+        if (a.target === "_blank") return;
+        if (/^(tel:|mailto:|javascript:|#)/i.test(href)) return;
+        addClass(body, "changing_page");
+    }, false);
+</script>
+
+
+	<main>
+		<section class="delivery_foto tal">
+			<img src="../images/delivery_img.jpg">
+			<div class="time_delivery">
+				<div class="time_delivery_time"><p>Дизайн-макет<span>Демо-режим</span></p><div class="corner"></div></div>
+				
+			</div>
+			<div class="helper"></div><div class="ibm tal">
+				<div class="delivery_logotype">
+					<img src="../images/delivery_logotype.png">
+				</div>
+				<h1>Доставка<span>еды в Ставрополе</span></h1>
+				<p style="font-size:1.5em; color:white; margin:0 0 25px;"><a href="#demo-notice" data-demo style="color:inherit; text-decoration:underline;">Заказать · демо</a></p>
+				<a href="#demo-notice" data-demo><div class="btn_line">Скачать меню</div></a>
+				<a href="#demo-notice" data-demo><div class="btn_line" style="margin-left:10px;">Скачать обеды</div></a>
+			</div>
+		</section><section class="delivery_info">
+			<div class="call_delivery">
+				<p>Доставка<span>Только демонстрация</span></p>
+			</div>
+			<div class="helper"></div><div class="ibm">
+				<h1>Доставка · демо</h1>
+				<p>Эта страница показывает дизайн раздела доставки.</p>
+				<p><a href="../menu/catalog.html">Посмотрите блюда в локальном меню</a></p>
+				<p>Кнопки заказа и скачивания открывают демонстрационное уведомление.</p>
+				<span>Заказы не принимаются.<br>Доставка не осуществляется.</span>
+
+                <p>Оплата, связь с менеджером и отправка заявок отключены.</p>
+                <p>Файлы не скачиваются; контактные данные не запрашиваются.</p>
+                <p><a href="../information/index.html">Подробнее о макете</a></p>
+			</div>
+			<div class="price_delivery">
+				<i></i><p>Доставка<span>Не подключена</span></p>
+			</div>
+		</section>
+	</main>
+<script>
+	
+	//resize картинок
+	function imgResize() {
+		var images = document.querySelectorAll('main img');
+		for(var i = 0; i < images.length; i++){
+			if(images[i].offsetWidth <= images[i].parentNode.offsetWidth) {
+				images[i].style.width = '100%';
+				images[i].style.height = 'auto';
+			}
+			else {
+				images[i].style.width = 'auto';
+				images[i].style.height = '100%';
+			}
+			if(images[i].offsetHeight <= images[i].parentNode.offsetHeight) {
+				images[i].style.width = 'auto';
+				images[i].style.height = '100%';
+			}
+			else {
+				images[i].style.width = '100%';
+				images[i].style.height = 'auto';
+			}
+		}
+	}
+	window.addEventListener('load', imgResize, false);
+	window.addEventListener('resize', imgResize, false);
+</script>
+
+</body>
+</html>

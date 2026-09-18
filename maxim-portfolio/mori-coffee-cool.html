@@ -1,0 +1,694 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="description" content="MORI / COFFEE: уютная кофейня: specialty кофе, свежая выпечка, завтраки и спокойные утренние часы." />
+<title>MORI / COFFEE: кофейня и пекарня</title>
+<style>
+:root{
+  --cream:#f6f1e7;--panel:#fdfaf3;--espresso:#241a12;--espresso-2:#3a2a1c;
+  --olive:#8a9469;--olive-soft:#e7e9dc;--caramel:#b06a3f;
+  --text:#241a12;--muted:#7d7266;--line:rgba(36,26,18,.14);
+  --shadow:0 24px 70px rgba(36,26,18,.12);
+  --max:1180px;--serif:Georgia,'Times New Roman',serif;
+  --ease:cubic-bezier(.32,.72,0,1);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{transition-duration:.01ms!important;animation-duration:.01ms!important}
+}
+body{margin:0;background:var(--cream);color:var(--text);font-family:"Segoe UI",system-ui,-apple-system,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+button,input,select{font:inherit;color:inherit}
+button{cursor:pointer}
+img{display:block}
+:focus-visible{outline:2px solid var(--caramel);outline-offset:3px;border-radius:4px}
+.wrap{width:min(calc(100% - 48px),var(--max));margin:0 auto}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;border:1px solid var(--line);border-radius:999px;padding:6px 14px;background:var(--panel);color:var(--muted);font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase}
+.section-title{margin:18px 0 0;font-family:var(--serif);font-weight:400;font-size:clamp(34px,4.6vw,60px);line-height:1.02;letter-spacing:-.02em}
+.section-title em{font-style:italic;color:var(--caramel)}
+.section-intro{max-width:340px;margin:0;color:var(--muted);font-size:15px}
+.skip-link{position:absolute;left:-999px;top:8px;z-index:200;background:var(--espresso);color:var(--cream);padding:10px 18px;border-radius:999px}
+.skip-link:focus{left:12px}
+.motion{opacity:1;transform:none;transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.motion.reveal-pending{opacity:0;transform:translateY(26px)}
+.modal:not(.open),.cart-drawer:not(.open){visibility:hidden}
+section{scroll-margin-top:100px}
+img{background:#5c4634;color:#f6f1e7}
+.menu-card{min-height:310px}
+#item-list{list-style:none;padding:0}
+.cart-items{min-height:0}
+.qty-btn{width:44px;height:44px}
+@media(max-width:480px){.nav{gap:8px;padding-left:12px}.brand{font-size:10px;letter-spacing:.04em;max-width:130px}.brand-mark{display:none}.nav-tools{gap:6px}.cart-toggle{padding:10px}.gallery-grid{grid-template-columns:1fr;grid-template-rows:repeat(3,240px)}.gallery-card:first-child{grid-row:auto}}
+.motion.visible{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.motion{opacity:1;transform:none}}
+
+.header{position:fixed;z-index:60;top:14px;left:0;right:0}
+.nav{width:min(calc(100% - 32px),var(--max));margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:20px;background:rgba(253,250,243,.85);backdrop-filter:blur(14px);border:1px solid var(--line);border-radius:999px;padding:9px 12px 9px 20px;box-shadow:0 10px 30px rgba(36,26,18,.07)}
+.brand{display:flex;align-items:center;gap:10px;font-size:12px;font-weight:800;letter-spacing:.16em;text-transform:uppercase}
+.brand-mark{width:32px;height:32px;border-radius:50%;background:var(--espresso);color:var(--cream);display:grid;place-items:center;flex:none}
+.brand-mark svg{width:19px;height:19px}
+.nav-links{display:flex;gap:26px;font-size:13px;font-weight:600;color:var(--muted)}
+.nav-links a{transition:color .25s}
+.nav-links a:hover{color:var(--caramel)}
+.nav-tools{display:flex;align-items:center;gap:10px}
+.cart-toggle{border:1px solid var(--line);border-radius:999px;background:transparent;padding:9px 16px;font-size:12px;font-weight:700;transition:background .25s,color .25s}
+.cart-toggle:hover{background:var(--espresso);color:var(--cream)}
+.cart-toggle b{color:var(--caramel);font-variant-numeric:tabular-nums}
+.nav-book{border:0;border-radius:999px;background:var(--espresso);color:var(--cream);padding:10px 18px;font-size:12px;font-weight:700;transition:background .25s}
+.nav-book:hover{background:var(--caramel)}
+.menu-toggle{display:none;position:relative;width:42px;height:42px;border:1px solid var(--line);border-radius:50%;background:transparent}
+.menu-toggle span{position:absolute;left:11px;right:11px;height:1.6px;background:var(--text);transition:transform .35s var(--ease)}
+.menu-toggle span:first-child{transform:translateY(-4px)}
+.menu-toggle span:last-child{transform:translateY(4px)}
+.menu-toggle[aria-expanded="true"] span:first-child{transform:rotate(45deg)}
+.menu-toggle[aria-expanded="true"] span:last-child{transform:rotate(-45deg)}
+.mobile-menu{position:fixed;z-index:55;inset:0;display:none;background:rgba(246,241,231,.96);backdrop-filter:blur(18px);padding:110px 32px 40px;overflow:auto}
+.mobile-menu.open{display:block}
+.mobile-menu nav{display:grid}
+.mobile-menu a{font-family:var(--serif);font-size:32px;padding:14px 0;border-bottom:1px solid var(--line)}
+
+.hero{min-height:100svh;display:flex;align-items:center;padding:130px 0 70px}
+.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:70px;align-items:center}
+.hero h1{margin:26px 0 0;font-family:var(--serif);font-weight:400;font-size:clamp(52px,7.4vw,104px);line-height:.96;letter-spacing:-.02em}
+.hero h1 em{font-style:italic;color:var(--caramel)}
+.hero-copy{max-width:440px;margin:28px 0 0;color:var(--muted);font-size:17px}
+.hero-actions{display:flex;flex-wrap:wrap;align-items:center;gap:14px;margin-top:34px}
+.button{display:inline-flex;align-items:center;gap:12px;border:1px solid transparent;border-radius:999px;padding:14px 22px;background:var(--espresso);color:var(--cream);font-size:13px;font-weight:700;transition:background .3s,transform .3s var(--ease),color .3s}
+.button:hover{background:var(--caramel);transform:translateY(-2px)}
+.button:active{transform:scale(.98)}
+.button .btn-ico{display:inline-grid;place-items:center;width:26px;height:26px;border-radius:50%;background:rgba(255,255,255,.16);font-size:12px;transition:transform .3s var(--ease)}
+.button:hover .btn-ico{transform:translateX(2px)}
+.button-light{background:transparent;border-color:var(--line);color:var(--text)}
+.button-light .btn-ico{background:rgba(36,26,18,.08)}
+.button-light:hover{background:var(--olive-soft);color:var(--text)}
+.hero-hours{display:flex;align-items:center;gap:10px;margin-top:26px;color:var(--muted);font-size:13px}
+.hero-hours i{width:8px;height:8px;border-radius:50%;background:var(--olive);box-shadow:0 0 0 5px rgba(138,148,105,.18)}
+.hero-photo{position:relative}
+.hero-frame{border:1px solid var(--line);border-radius:2rem;background:rgba(36,26,18,.05);padding:10px;box-shadow:var(--shadow)}
+.hero-frame-inner{border-radius:calc(2rem - 8px);overflow:hidden;background:#5c4634}
+.hero-frame img{width:100%;height:min(64vh,560px);object-fit:cover;transition:transform 1.2s var(--ease)}
+.hero-frame:hover img{transform:scale(1.035)}
+.hero-caption{display:flex;justify-content:space-between;padding:12px 8px 4px;color:var(--muted);font-size:11px;letter-spacing:.12em;text-transform:uppercase}
+section{padding:110px 0}
+.section-head{display:flex;justify-content:space-between;align-items:end;gap:34px;margin-bottom:52px}
+
+.story-grid{display:grid;grid-template-columns:1fr 1fr;gap:90px;align-items:start}
+.story-lead{margin:0;font-family:var(--serif);font-size:clamp(26px,3.2vw,42px);line-height:1.12}
+.story-lead em{color:var(--caramel)}
+.story-copy{margin:0;color:var(--muted);font-size:16px;max-width:460px}
+.facts{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;border-top:1px solid var(--line);margin-top:46px;padding-top:24px}
+.fact-no{position:relative;font-family:var(--serif);font-size:36px;font-variant-numeric:tabular-nums;font-feature-settings:"tnum";white-space:nowrap}
+.fact-no.counting{color:transparent}
+.fact-count{position:absolute;inset:0;color:var(--text)}
+@media(prefers-reduced-motion:reduce){.fact-no.counting{color:var(--text)}.fact-count{display:none}}
+.fact-label{color:var(--muted);font-size:12px;margin-top:4px}
+
+.menu-section{background:var(--espresso);color:#f4ede1}
+.menu-section .eyebrow{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.18);color:#cbbfae}
+.menu-section .section-intro{color:#b9ad9c}
+.menu-layout{display:grid;grid-template-columns:.72fr 1.28fr;gap:70px}
+.menu-aside{position:sticky;top:110px;align-self:start}
+.menu-aside p{max-width:280px;color:#b9ad9c;font-size:14px}
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin-top:28px}
+.filter{border:1px solid rgba(244,237,225,.28);border-radius:999px;padding:9px 16px;background:transparent;color:#cfc3b1;font-size:12px;font-weight:600;transition:background .25s,color .25s,border-color .25s}
+.filter:hover{border-color:#f4ede1;color:#f4ede1}
+.filter.active{background:var(--olive);border-color:var(--olive);color:#fff}
+.menu-count{margin-top:20px;color:#8d8171;font-size:12px;font-variant-numeric:tabular-nums}
+.menu-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.menu-card{position:relative;border:1px solid rgba(244,237,225,.16);border-radius:1.5rem;overflow:hidden;background:var(--espresso-2);isolation:isolate;text-align:left;padding:0;transition:transform .35s var(--ease),border-color .25s,box-shadow .35s}
+.menu-card:hover{transform:translateY(-6px);border-color:rgba(244,237,225,.4);box-shadow:0 22px 50px rgba(0,0,0,.3)}
+.menu-card.hidden{display:none}
+.menu-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.7;transition:transform .8s var(--ease),opacity .3s}
+.menu-card:hover img{transform:scale(1.06);opacity:.88}
+.menu-card::after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(36,26,18,0) 30%,rgba(24,17,10,.86))}
+.menu-card-content{position:absolute;z-index:2;left:20px;right:20px;bottom:18px;color:#f4ede1}
+.menu-top{display:flex;justify-content:space-between;gap:10px;color:rgba(244,237,225,.66);font-size:10px;letter-spacing:.12em;text-transform:uppercase}
+.menu-top .price{color:#e4c79a;font-weight:700;font-variant-numeric:tabular-nums}
+.menu-card h3{margin:9px 0 4px;font-family:var(--serif);font-weight:400;font-size:24px;letter-spacing:-.01em}
+.menu-card p{margin:0;color:rgba(244,237,225,.75);font-size:13px}
+
+.gallery{background:var(--olive-soft)}
+.gallery-grid{display:grid;grid-template-columns:1.15fr .85fr;grid-template-rows:230px 230px;gap:16px}
+.gallery-card{position:relative;margin:0;overflow:hidden;border-radius:1.4rem;background:#9aa17c}
+.gallery-card:first-child{grid-row:span 2}
+.gallery-card img{width:100%;height:100%;object-fit:cover;transition:transform .9s var(--ease)}
+.gallery-card:hover img{transform:scale(1.05)}
+.gallery-card::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 45%,rgba(24,17,10,.5))}
+.gallery-label{position:absolute;z-index:2;left:18px;bottom:16px;color:#fff;font-size:11px;letter-spacing:.14em;text-transform:uppercase}
+
+.booking{background:var(--espresso-2);color:#f4ede1}
+.booking-grid{display:flex;align-items:center;justify-content:space-between;gap:40px}
+.booking .eyebrow{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.18);color:#cbbfae}
+.booking .section-intro{color:#b9ad9c}
+.booking .button{background:var(--olive)}
+.booking .button:hover{background:#9aa578}
+
+.footer{padding:56px 0 64px}
+.footer-row{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:20px;border-top:1px solid var(--line);padding-top:34px;color:var(--muted);font-size:13px}
+.footer a{border-bottom:1px solid var(--line);padding-bottom:2px}
+.footer a:hover{color:var(--caramel);border-color:var(--caramel)}
+.portfolio-link{margin-top:14px;font-size:12px;color:var(--muted)}
+
+.modal{position:fixed;z-index:100;inset:0;display:grid;place-items:center;padding:20px;background:rgba(24,17,10,.55);backdrop-filter:blur(10px);opacity:0;pointer-events:none;transition:opacity .3s var(--ease)}
+.modal.open{opacity:1;pointer-events:auto}
+.modal-panel{position:relative;width:min(100%,760px);max-height:min(700px,calc(100svh - 40px));overflow:auto;border-radius:1.6rem;background:var(--panel);color:var(--text);box-shadow:var(--shadow);transform:translateY(20px) scale(.97);transition:transform .4s var(--ease)}
+.modal.open .modal-panel{transform:none}
+.modal-close{position:absolute;z-index:3;top:16px;right:16px;width:36px;height:36px;border:1px solid var(--line);border-radius:50%;background:rgba(253,250,243,.9);font-size:17px;transition:background .25s,color .25s}
+.modal-close:hover{background:var(--espresso);color:var(--cream)}
+.booking-panel{display:grid;grid-template-columns:.9fr 1.1fr}
+.modal-photo{position:relative;min-height:420px;background:#5c4634;overflow:hidden;border-radius:1.6rem 0 0 1.6rem}
+.modal-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.modal-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent,rgba(24,17,10,.5))}
+.modal-photo-label{position:absolute;z-index:2;left:22px;bottom:20px;color:#fff;font-size:11px;letter-spacing:.14em;text-transform:uppercase}
+.modal-form{padding:44px 38px 36px}
+.modal-form h2{margin:18px 0 0;font-family:var(--serif);font-weight:400;font-size:36px;line-height:1.05}
+.modal-form>p{color:var(--muted);font-size:14px;max-width:340px}
+.form-fields{display:grid;gap:16px;margin:26px 0}
+.form-fields label{display:grid;gap:7px;font-size:12px;font-weight:700;color:var(--muted)}
+.form-fields input,.form-fields select{border:1px solid var(--line);border-radius:.9rem;background:#fff;padding:12px 15px;font-size:14px;color:var(--text)}
+.form-note{margin:14px 0 0;color:var(--muted);font-size:11px}
+.success{display:none;margin-top:16px;padding:14px 16px;border:1px solid var(--line);border-radius:.9rem;background:#fff;font-weight:700}
+.success.show{display:block}
+.success span{display:block;font-weight:400;color:var(--muted);font-size:13px;margin-top:3px}
+
+.item-panel{width:min(100%,820px)}
+.item-panel-grid{display:grid;grid-template-columns:1fr 1fr}
+.item-image{position:relative;min-height:380px;background:#5c4634;overflow:hidden;border-radius:1.6rem 0 0 1.6rem}
+.item-image img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.item-details{padding:40px 34px 34px}
+.item-details h2{margin:14px 0 6px;font-family:var(--serif);font-weight:400;font-size:34px}
+.item-price{color:var(--caramel);font-weight:700;font-size:18px;font-variant-numeric:tabular-nums}
+.item-details p{color:var(--muted);font-size:14px}
+.item-list{list-style:none;margin:20px 0 26px;padding:0;border-top:1px solid var(--line)}
+.item-list li{display:flex;justify-content:space-between;gap:14px;padding:10px 0;border-bottom:1px solid var(--line);font-size:13px}
+.item-list b{font-weight:600;color:var(--muted)}
+
+.cart-backdrop{position:fixed;z-index:108;inset:0;background:rgba(24,17,10,.45);backdrop-filter:blur(6px);opacity:0;pointer-events:none;transition:opacity .3s var(--ease)}
+.cart-backdrop.open{opacity:1;pointer-events:auto}
+.cart-drawer{position:fixed;z-index:110;top:0;right:0;width:min(420px,100vw);height:100%;display:flex;flex-direction:column;background:var(--panel);box-shadow:-20px 0 70px rgba(0,0,0,.25);transform:translateX(103%);transition:transform .45s var(--ease);padding:28px}
+.cart-drawer.open{transform:none}
+.cart-head{display:flex;align-items:flex-start;justify-content:space-between;gap:18px;padding-bottom:22px;border-bottom:1px solid var(--line)}
+.cart-head h2{margin:10px 0 0;font-family:var(--serif);font-weight:400;font-size:34px}
+.cart-items{flex:1;overflow:auto;padding:8px 0}
+.cart-empty{color:var(--muted);font-size:13px;padding:28px 0}
+.cart-row{display:flex;justify-content:space-between;gap:15px;padding:15px 0;border-bottom:1px solid var(--line)}
+.cart-row strong{display:block;font-size:15px}
+.cart-row small{display:block;margin-top:4px;color:var(--muted);font-size:12px}
+.cart-row-side{text-align:right}
+.cart-row-side b{display:block;font-size:13px;font-variant-numeric:tabular-nums}
+.qty-controls{display:inline-flex;align-items:center;gap:8px;margin-top:6px}
+.qty-btn{width:24px;height:24px;border:1px solid var(--line);border-radius:50%;background:transparent;font-size:13px;line-height:1;display:grid;place-items:center;transition:background .2s,color .2s}
+.qty-btn:hover{background:var(--espresso);color:var(--cream)}
+.cart-foot{border-top:1px solid var(--line);padding-top:18px}
+.cart-total{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;font-size:13px;color:var(--muted)}
+.cart-total strong{color:var(--text);font-family:var(--serif);font-size:24px;font-variant-numeric:tabular-nums}
+.cart-message{min-height:18px;margin:10px 0 0;color:var(--caramel);font-size:12px;font-weight:700}
+.cart-toast{position:fixed;z-index:140;left:50%;top:100px;transform:translate(-50%,-12px);display:flex;align-items:center;gap:10px;background:var(--espresso);color:var(--cream);border-radius:999px;padding:11px 20px;font-size:13px;font-weight:700;opacity:0;pointer-events:none;transition:opacity .3s var(--ease),transform .3s var(--ease)}
+.cart-toast.show{opacity:1;transform:translate(-50%,0)}
+.cart-toast span{display:grid;place-items:center;width:20px;height:20px;border-radius:50%;background:var(--olive);font-size:11px}
+
+@media(max-width:960px){
+  .menu-layout{grid-template-columns:1fr;gap:40px}
+  .menu-aside{position:static}
+  .menu-grid{grid-template-columns:repeat(2,1fr)}
+  .story-grid{grid-template-columns:1fr;gap:40px}
+}
+@media(max-width:800px){
+  .wrap{width:min(calc(100% - 32px),var(--max))}
+  .nav-links,.nav-book{display:none}
+  .menu-toggle{display:block}
+  .hero{padding:118px 0 56px}
+  .hero-grid{grid-template-columns:1fr;gap:40px}
+  .hero h1{font-size:clamp(48px,13vw,84px)}
+  .hero-frame img{height:min(48vh,420px)}
+  section{padding:76px 0}
+  .section-head{display:block;margin-bottom:34px}
+  .section-intro{margin-top:16px}
+  .menu-grid{grid-template-columns:1fr}
+  .gallery-grid{grid-template-columns:1fr 1fr;grid-template-rows:200px 170px}
+  .gallery-card:first-child{grid-row:span 2}
+  .booking-grid{display:block}
+  .booking .button{margin-top:24px}
+  .modal-panel{max-height:calc(100svh - 24px)}
+  .booking-panel,.item-panel-grid{display:block}
+  .modal-photo,.item-image{min-height:200px;max-height:250px;border-radius:1.6rem 1.6rem 0 0}
+  .modal-form,.item-details{padding:28px 22px 24px}
+  .footer-row{flex-direction:column;align-items:flex-start}
+}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Перейти к содержанию</a>
+<header class="header">
+  <div class="nav">
+    <a class="brand" href="#top"><span class="brand-mark" aria-hidden="true" inert><svg viewBox="0 0 64 64" fill="none"><path d="M18 24h25v12a12 12 0 0 1-12 12h-1a12 12 0 0 1-12-12V24Z" stroke="currentColor" stroke-width="5" stroke-linejoin="round"/><path d="M43 28h4a7 7 0 0 1 0 14h-4" stroke="currentColor" stroke-width="5" stroke-linecap="round"/><path d="M22 16c0-4 4-4 4-8M32 16c0-4 4-4 4-8" stroke="currentColor" stroke-width="4" stroke-linecap="round"/></svg></span>MORI / COFFEE</a>
+    <nav class="nav-links" aria-label="Основная навигация">
+      <a href="#story">О нас</a><a href="#menu">Меню</a><a href="#space">Пространство</a><a href="#booking">Бронь</a>
+    </nav>
+    <div class="nav-tools">
+      <button class="cart-toggle" type="button" id="cart-toggle" aria-haspopup="dialog" aria-label="Открыть корзину">Корзина <b id="cart-count">0</b></button>
+      <button class="nav-book open-booking" type="button">Забронировать стол</button>
+      <button class="menu-toggle" type="button" aria-label="Открыть меню" aria-expanded="false" aria-controls="mobile-menu"><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+<div class="mobile-menu" id="mobile-menu" role="dialog" aria-modal="true" aria-label="Навигация" aria-hidden="true" inert hidden style="z-index:100">
+  <button class="modal-close" type="button" data-close aria-label="Закрыть меню">×</button>
+  <nav aria-label="Мобильная навигация">
+    <a href="#story">О нас</a><a href="#menu">Меню</a><a href="#space">Пространство</a><a href="#booking" class="open-booking">Бронь · демо</a>
+  </nav>
+</div>
+<main id="main">
+<section class="hero" id="top">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow">Кофейня и пекарня / с 08:00</span>
+      <h1>MORI: <em>утро в своём ритме.</em></h1>
+      <p class="hero-copy">MORI: тихое место для первого фильтра, тёплой выпечки и разговоров, которые не хочется заканчивать. Завтракаем, работаем, знакомимся заново.</p>
+      <div class="hero-actions">
+        <a class="button" href="#menu">Открыть меню <span class="btn-ico" aria-hidden="true" inert>↓</span></a>
+        <button class="button button-light open-booking" type="button">Забронировать стол <span class="btn-ico" aria-hidden="true" inert>↗</span></button>
+      </div>
+      <p class="hero-hours"><i aria-hidden="true" inert></i> каждый день с 08:00 до 22:00</p>
+    </div>
+    <div class="hero-photo motion">
+      <div class="hero-frame"><div class="hero-frame-inner">
+        <img src="https://images.unsplash.com/photo-1445116572660-236099ec97a0?auto=format&fit=crop&w=1200&q=85" alt="Тёплый интерьер кофейни MORI">
+      </div><div class="hero-caption"><span>медленное утро</span><span>кофе и выпечка</span></div></div>
+    </div>
+  </div>
+</section>
+<section id="story">
+  <div class="wrap story-grid">
+    <div class="motion">
+      <span class="eyebrow">Наша идея</span>
+      <p class="story-lead">Меньше шума. Больше места <em>для вкуса.</em></p>
+      <div class="facts">
+        <div><div class="fact-no" data-count="8">8</div><div class="fact-label">лет выбираем зерно</div></div>
+        <div><div class="fact-no" data-count="12">12</div><div class="fact-label">напитков в карте</div></div>
+        <div><div class="fact-no" data-count="7" data-suffix=":30">7:30</div><div class="fact-label">начинаем готовить</div></div>
+      </div>
+    </div>
+    <div class="motion">
+      <p class="story-copy">MORI: маленький кофе-бар, придуманный для больших пауз. Здесь можно взять эспрессо на ходу, остаться с ноутбуком или встретиться с человеком, которого давно не видели. Мы не торопим ни вас, ни кофе: зерно обжаривают небольшими партиями, молоко взбивают до шелка, а выпечку достают из печи каждое утро.</p>
+    </div>
+  </div>
+</section>
+<section id="menu" class="menu-section">
+  <div class="wrap menu-layout">
+    <aside class="menu-aside motion">
+      <span class="eyebrow">Меню</span>
+      <h2 class="section-title">Найдите свой <em style="color:#e4c79a">ритуал.</em></h2>
+      <p>Нажмите на карточку, чтобы посмотреть состав, объём и детали. Всё можно добавить в демонстрационную корзину.</p>
+      <div class="filters" role="group" aria-label="Категории меню">
+        <button class="filter active" type="button" data-filter="all" aria-pressed="true">Всё</button>
+        <button class="filter" type="button" data-filter="coffee" aria-pressed="false">Кофе</button>
+        <button class="filter" type="button" data-filter="cold" aria-pressed="false">Холодное</button>
+        <button class="filter" type="button" data-filter="food" aria-pressed="false">Еда и выпечка</button>
+      </div>
+      <p class="menu-count" id="menu-count" role="status">9 позиций</p>
+    </aside>
+    <div class="menu-grid" id="menu-grid">
+      <button class="menu-card motion" type="button" data-category="coffee" data-item="cappuccino" aria-haspopup="dialog">
+        <img src="https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=900&q=85" alt="Капучино" loading="lazy">
+        <div class="menu-card-content"><div class="menu-top"><span>01 / кофе</span><span class="price">280 ₽</span></div><h3>Капучино</h3><p>двойной эспрессо, молоко, микропена</p></div>
+      </button>
+      <button class="menu-card motion" type="button" data-category="coffee" data-item="filter" aria-haspopup="dialog">
+        <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=900&q=85" alt="Фильтр кофе" loading="lazy">
+        <div class="menu-card-content"><div class="menu-top"><span>02 / кофе</span><span class="price">320 ₽</span></div><h3>Фильтр дня</h3><p>сезонное зерно, ручная заварка, чистый вкус</p></div>
+      </button>
+      <button class="menu-card motion" type="button" data-category="coffee" data-item="raf" aria-haspopup="dialog">
+        <img src="https://images.unsplash.com/photo-1579888071069-c107a6f79d82?auto=format&fit=crop&w=900&q=85" alt="Ванильный раф" loading="lazy">
+        <div class="menu-card-content"><div class="menu-top"><span>03 / кофе</span><span class="price">340 ₽</span></div><h3>Ванильный раф</h3><p>сливки, эспрессо, ваниль, мягкая сладость</p></div>
+      </button>
+      <button class="menu-card motion" type="button" data-category="cold" data-item="matcha" aria-haspopup="dialog">
+        <img src="https://images.unsplash.com/photo-1536256263959-770b48d82b0a?auto=format&fit=crop&w=900&q=85" alt="Матча-тоник" loading="lazy">
+        <div class="menu-card-content"><div class="menu-top"><span>04 / холодное</span><span class="price">350 ₽</span></div><h3>Матча-тоник</h3><p>холодная матча, цитрус, тоник и лёд</p></div>
+      </button>
+      <button class="menu-card motion" type="button" data-category="cold" data-item="bumble" aria-haspopup="dialog">
+        <img src="https://images.unsplash.com/photo-1621263764928-df1444c5e859?auto=format&fit=crop&w=900&q=85" alt="Бамбл кофе" loading="lazy">
+        <div class="menu-card-content"><div class="menu-top"><span>05 / холодное</span><span class="price">360 ₽</span></div><h3>Бамбл</h3><p>эспрессо, апельсиновый сок, карамель, лёд</p></div>
+      </button>
+      <button class="menu-card motion" type="button" data-category="cold" data-item="espressoTonic" aria-haspopup="dialog">
+        <img src="https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=900&q=85" alt="Эспрессо-тоник" loading="lazy">
+        <div class="menu-card-content"><div class="menu-top"><span>06 / холодное</span><span class="price">330 ₽</span></div><h3>Эспрессо-тоник</h3><p>тоник, двойной эспрессо, лимонная цедра</p></div>
+      </button>
+      <button class="menu-card motion" type="button" data-category="food" data-item="bun" aria-haspopup="dialog">
+        <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=900&q=85" alt="Булочка MORI" loading="lazy">
+        <div class="menu-card-content"><div class="menu-top"><span>07 / выпечка</span><span class="price">240 ₽</span></div><h3>Булочка MORI</h3><p>слоёное тесто, масло, апельсиновый крем</p></div>
+      </button>
+      <button class="menu-card motion" type="button" data-category="food" data-item="croissant" aria-haspopup="dialog">
+        <img src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=900&q=85" alt="Круассан" loading="lazy">
+        <div class="menu-card-content"><div class="menu-top"><span>08 / выпечка</span><span class="price">260 ₽</span></div><h3>Круассан</h3><p>хрустящий, сливочный, с миндальным кремом</p></div>
+      </button>
+      <button class="menu-card motion" type="button" data-category="food" data-item="toast" aria-haspopup="dialog">
+        <img src="https://images.unsplash.com/photo-1525351484163-7529414344d8?auto=format&fit=crop&w=900&q=85" alt="Авокадо-тост" loading="lazy">
+        <div class="menu-card-content"><div class="menu-top"><span>09 / еда</span><span class="price">430 ₽</span></div><h3>Авокадо-тост</h3><p>бриошь, авокадо, яйцо, зелень</p></div>
+      </button>
+    </div>
+  </div>
+</section>
+<section id="space" class="gallery">
+  <div class="wrap">
+    <div class="section-head motion">
+      <div><span class="eyebrow">Пространство</span><h2 class="section-title">Сюда приходят <em>за настроением.</em></h2></div>
+      <p class="section-intro">Мягкий свет, большие окна и столы, за которыми хочется задержаться.</p>
+    </div>
+    <div class="gallery-grid motion">
+      <figure class="gallery-card"><img src="https://images.unsplash.com/photo-1498804103079-a6351b050096?auto=format&fit=crop&w=1200&q=85" alt="Кофе на столе у окна" loading="lazy"><figcaption class="gallery-label">первый свет / 08:00</figcaption></figure>
+      <figure class="gallery-card"><img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=900&q=85" alt="Интерьер кафе" loading="lazy"><figcaption class="gallery-label">место, где хочется остаться</figcaption></figure>
+      <figure class="gallery-card"><img src="https://images.unsplash.com/photo-1447933601403-0c6688de566e?auto=format&fit=crop&w=900&q=85" alt="Кофейные зёрна" loading="lazy"><figcaption class="gallery-label">обжарено с заботой</figcaption></figure>
+    </div>
+  </div>
+</section>
+<section id="booking" class="booking">
+  <div class="wrap booking-grid">
+    <div class="motion">
+      <span class="eyebrow">Будем ждать</span>
+      <h2 class="section-title">Оставьте место для <em style="color:#e4c79a">хорошего дня.</em></h2>
+    </div>
+    <div class="motion">
+      <p class="section-intro">Откроется красивое окно брони, без ухода со страницы. Форма демонстрационная: заявка никуда не отправляется.</p>
+      <button class="button open-booking" type="button">Открыть форму <span class="btn-ico" aria-hidden="true" inert>↗</span></button>
+    </div>
+  </div>
+</section>
+</main>
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-row">
+      <span>MORI / COFFEE: кофейня и пекарня</span>
+      <span>Ежедневно с 08:00 до 22:00</span>
+      <a href="#top">Наверх ↑</a>
+    </div>
+    <p class="portfolio-link"><a href="maxim-portfolio.html">← Все проекты портфолио</a></p>
+  </div>
+</footer>
+<div class="modal" id="booking-modal" aria-hidden="true" inert>
+  <div class="modal-panel booking-panel" role="dialog" aria-modal="true" aria-labelledby="booking-title">
+    <button class="modal-close" type="button" data-close aria-label="Закрыть">×</button>
+    <div class="modal-photo"><img src="https://images.unsplash.com/photo-1445116572660-236099ec97a0?auto=format&fit=crop&w=1000&q=85" alt="Интерьер MORI"><div class="modal-photo-label">MORI / ваше место</div></div>
+    <form class="modal-form" id="booking-form" autocomplete="off">
+      <span class="eyebrow">Бронирование · демо</span>
+      <h2 id="booking-title">Попробуйте форму.</h2>
+      <p>Это только пример интерфейса. Реальная бронь недоступна. Все поля необязательны. Не вводите личные данные.</p>
+      <div class="form-fields">
+        <label>Вымышленное имя · необязательно<input name="demo-alias" autocomplete="off" placeholder="Например, Гость" maxlength="60"></label>
+        <label>Вымышленный контакт · необязательно<input name="demo-contact" autocomplete="off" placeholder="Например, @demo_guest" maxlength="80"></label>
+        <label>Сколько гостей · необязательно<select name="demo-guests" autocomplete="off"><option value="">Выберите количество</option><option>1 или 2 гостя</option><option>3 или 4 гостя</option><option>5 и больше</option></select></label>
+      </div>
+      <button class="button" type="button" id="preview-booking">Проверить демо-форму</button>
+      <p class="form-note">Ничего не отправляется и не сохраняется. Поля очищаются при закрытии.</p>
+      <p class="success" role="status"><strong>Ничего не отправлено.</strong><span>Стол не забронирован. Это только демонстрация формы.</span></p>
+    </form>
+  </div>
+</div>
+<div class="modal" id="item-modal" aria-hidden="true" inert>
+  <div class="modal-panel item-panel" role="dialog" aria-modal="true" aria-labelledby="item-title">
+    <button class="modal-close" type="button" data-close aria-label="Закрыть">×</button>
+    <div class="item-panel-grid">
+      <div class="item-image"><img id="item-image" alt=""></div>
+      <div class="item-details">
+        <span class="eyebrow" id="item-kicker">01 / кофе</span>
+        <h2 id="item-title">Капучино</h2>
+        <span class="item-price" id="item-price">280 ₽</span>
+        <p id="item-description">Двойной эспрессо, молоко и мягкая микропена.</p>
+        <ul class="item-list" id="item-list"></ul>
+        <button class="button add-to-cart" type="button" data-add-current>Добавить в корзину (демо) <span class="btn-ico" aria-hidden="true" inert>↗</span></button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="cart-backdrop" id="cart-backdrop"></div>
+<aside class="cart-drawer" id="cart-drawer" role="dialog" aria-modal="true" aria-label="Корзина" aria-hidden="true" inert>
+  <div class="cart-head">
+    <div><span class="eyebrow">Демо-заказ</span><h2>Корзина</h2></div>
+    <button class="modal-close" type="button" id="cart-close" aria-label="Закрыть корзину">×</button>
+  </div>
+  <div class="cart-items" id="cart-items"><p class="cart-empty">Пока пусто. Выберите что-нибудь из меню.</p></div>
+  <div class="cart-foot">
+    <div class="cart-total"><span>Итого</span><strong id="cart-total">0 ₽</strong></div>
+    <button class="button" id="checkout-btn" type="button" style="width:100%;justify-content:center">Проверить демо-корзину <span class="btn-ico" aria-hidden="true" inert>✓</span></button>
+    <p class="cart-message" id="cart-message" role="status"></p>
+  </div>
+</aside>
+<div class="cart-toast" id="cart-toast">Добавлено в корзину <span aria-hidden="true" inert>✓</span></div>
+<script>
+const menuToggle=document.querySelector('.menu-toggle');
+const mobileMenu=document.querySelector('#mobile-menu');
+const modals={booking:document.querySelector('#booking-modal'),item:document.querySelector('#item-modal')};
+let activeOverlay=null;
+let returnFocus=null;
+let previousOverflow='';
+const backgroundState=new Map();
+const focusables=overlay=>Array.from(overlay.querySelectorAll('a[href],button,input,select,textarea,[tabindex]')).filter(element=>element.tabIndex>=0&&!element.disabled&&!element.closest('[inert]')&&element.getClientRects().length);
+const concealOverlay=overlay=>{
+  overlay.classList.remove('open');
+  overlay.inert=true;
+  overlay.setAttribute('aria-hidden','true');
+  if(overlay===mobileMenu){
+    mobileMenu.hidden=true;
+    menuToggle.setAttribute('aria-expanded','false');
+  }
+  if(overlay.id==='cart-drawer')document.querySelector('#cart-backdrop').classList.remove('open');
+  if(overlay===modals.booking){
+    document.querySelector('#booking-form').reset();
+    overlay.querySelector('.success').classList.remove('show');
+  }
+};
+const restoreBackground=()=>{
+  backgroundState.forEach((inert,element)=>{element.inert=inert});
+  backgroundState.clear();
+};
+const openModal=(overlay,trigger=document.activeElement)=>{
+  if(activeOverlay===overlay)return;
+  if(activeOverlay){
+    const previous=activeOverlay;
+    activeOverlay=null;
+    document.activeElement.blur();
+    restoreBackground();
+    concealOverlay(previous);
+  }else{
+    returnFocus=trigger;
+    previousOverflow=document.body.style.overflow;
+    document.activeElement.blur();
+  }
+  activeOverlay=overlay;
+  overlay.hidden=false;
+  overlay.inert=false;
+  overlay.setAttribute('aria-hidden','false');
+  overlay.classList.add('open');
+  document.body.style.overflow='hidden';
+  if(overlay===mobileMenu)menuToggle.setAttribute('aria-expanded','true');
+  const backdrop=document.querySelector('#cart-backdrop');
+  if(overlay.id==='cart-drawer')backdrop.classList.add('open');
+  Array.from(document.body.children).forEach(element=>{
+    if(element===overlay||element.tagName==='SCRIPT'||(overlay.id==='cart-drawer'&&element===backdrop))return;
+    backgroundState.set(element,element.inert);
+    element.inert=true;
+  });
+  focusables(overlay)[0]?.focus({preventScroll:true});
+};
+const closeModal=()=>{
+  if(!activeOverlay)return;
+  const previous=activeOverlay;
+  activeOverlay=null;
+  document.activeElement.blur();
+  restoreBackground();
+  concealOverlay(previous);
+  document.body.style.overflow=previousOverflow;
+  const target=returnFocus;
+  returnFocus=null;
+  if(target?.isConnected&&!target.closest('[inert]')&&target.getClientRects().length)target.focus({preventScroll:true});
+  else menuToggle.focus({preventScroll:true});
+};
+menuToggle.addEventListener('click',()=>openModal(mobileMenu,menuToggle));
+mobileMenu.querySelectorAll('a:not(.open-booking)').forEach(link=>link.addEventListener('click',()=>{
+  closeModal();
+  const section=document.querySelector(link.getAttribute('href'));
+  section.tabIndex=-1;
+  section.focus({preventScroll:true});
+}));
+const mobileViewport=matchMedia('(max-width:800px)');
+mobileViewport.addEventListener('change',event=>{if(!event.matches&&activeOverlay===mobileMenu)closeModal()});
+document.querySelectorAll('.open-booking').forEach(button=>button.addEventListener('click',event=>{event.preventDefault();openModal(modals.booking,button)}));
+document.querySelectorAll('[data-close]').forEach(button=>button.addEventListener('click',closeModal));
+document.querySelectorAll('.modal').forEach(modal=>modal.addEventListener('click',event=>{if(event.target===modal&&activeOverlay===modal)closeModal()}));
+document.addEventListener('keydown',event=>{
+  if(!activeOverlay)return;
+  if(event.key==='Escape'){
+    event.preventDefault();
+    event.stopPropagation();
+    closeModal();
+    return;
+  }
+  if(event.key!=='Tab')return;
+  const elements=focusables(activeOverlay);
+  const first=elements[0];
+  const last=elements[elements.length-1];
+  if(!elements.length){event.preventDefault();return}
+  if(!activeOverlay.contains(document.activeElement)||(event.shiftKey&&document.activeElement===first)||(!event.shiftKey&&document.activeElement===last)){
+    event.preventDefault();
+    (event.shiftKey?last:first).focus();
+  }
+});
+document.addEventListener('focusin',event=>{
+  if(activeOverlay&&!activeOverlay.contains(event.target))focusables(activeOverlay)[0]?.focus({preventScroll:true});
+});
+
+const itemData={
+  cappuccino:{kicker:'01 / кофе',title:'Капучино',amount:280,price:'280 ₽',description:'Двойной эспрессо, молоко и микропена. Мягкий, плотный и спокойный.',image:'https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=1000&q=85',list:[['Зерно','Brazil / natural'],['Объём','220 мл'],['Профиль','шоколад, карамель']]},
+  filter:{kicker:'02 / кофе',title:'Фильтр дня',amount:320,price:'320 ₽',description:'Каждый день новый лот от небольших обжарщиков. Завариваем вручную и рассказываем, что в чашке.',image:'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=1000&q=85',list:[['Зерно','сезонный лот'],['Метод','V60'],['Время','4 минуты']]},
+  raf:{kicker:'03 / кофе',title:'Ванильный раф',amount:340,price:'340 ₽',description:'Сливки, эспрессо и настоящая ваниль. Наш самый убаюкивающий напиток.',image:'https://images.unsplash.com/photo-1579888071069-c107a6f79d82?auto=format&fit=crop&w=1000&q=85',list:[['Основа','сливки 11%'],['Объём','250 мл'],['Профиль','ваниль, сливки']]},
+  matcha:{kicker:'04 / холодное',title:'Матча-тоник',amount:350,price:'350 ₽',description:'Японская матча, цитрус, тоник и много льда. Свежо, чисто, чуть горько.',image:'https://images.unsplash.com/photo-1536256263959-770b48d82b0a?auto=format&fit=crop&w=1000&q=85',list:[['Основа','церемониальная матча'],['Добавка','цитрус'],['Подача','со льдом']]},
+  bumble:{kicker:'05 / холодное',title:'Бамбл',amount:360,price:'360 ₽',description:'Эспрессо, свежий апельсиновый сок и щепотка карамели. Лето в стакане.',image:'https://images.unsplash.com/photo-1621263764928-df1444c5e859?auto=format&fit=crop&w=1000&q=85',list:[['Сок','апельсин'],['Основа','двойной эспрессо'],['Подача','со льдом']]},
+  espressoTonic:{kicker:'06 / холодное',title:'Эспрессо-тоник',amount:330,price:'330 ₽',description:'Тоник, двойной эспрессо и лимонная цедра. Бодрит лучше, чем будильник.',image:'https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=1000&q=85',list:[['Основа','тоник'],['Кофе','двойной эспрессо'],['Цедра','лимон']]},
+  bun:{kicker:'07 / выпечка',title:'Булочка MORI',amount:240,price:'240 ₽',description:'Слоёное тесто, сливочное масло и апельсиновый крем. Лучше всего с фильтром.',image:'https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=1000&q=85',list:[['Состав','тесто, масло, апельсин'],['Подача','тёплая'],['Совет','разделить пополам']]},
+  croissant:{kicker:'08 / выпечка',title:'Круассан',amount:260,price:'260 ₽',description:'Хрустящий снаружи, сливочный внутри, с миндальным кремом.',image:'https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=1000&q=85',list:[['Тесто','27 слоёв'],['Крем','миндальный'],['Подача','утренняя партия']]},
+  toast:{kicker:'09 / еда',title:'Авокадо-тост',amount:430,price:'430 ₽',description:'Бриошь, спелый авокадо, яйцо и свежая зелень. Завтрак, который держит до обеда.',image:'https://images.unsplash.com/photo-1525351484163-7529414344d8?auto=format&fit=crop&w=1000&q=85',list:[['Основа','бриошь'],['Топпинг','авокадо, яйцо'],['Зелень','руккола']]}
+};
+let currentItemKey=null;const itemModal=modals.item;
+document.querySelectorAll('.menu-card').forEach(card=>card.addEventListener('click',()=>{
+  const key=card.dataset.item;const data=itemData[key];currentItemKey=key;
+  document.querySelector('#item-kicker').textContent=data.kicker;
+  document.querySelector('#item-title').textContent=data.title;
+  document.querySelector('#item-price').textContent=data.price;
+  document.querySelector('#item-description').textContent=data.description;
+  const image=document.querySelector('#item-image');image.src=data.image;image.alt=data.title;
+  document.querySelector('#item-list').innerHTML=data.list.map(row=>`<li><b>${row[0]}</b> <span>${row[1]}</span></li>`).join('');
+  openModal(itemModal);
+}));
+document.querySelector('[data-add-current]').addEventListener('click',()=>addToCart(currentItemKey));
+
+const filterButtons=document.querySelectorAll('.filter');
+const menuCards=document.querySelectorAll('.menu-card');
+const menuCount=document.querySelector('#menu-count');
+filterButtons.forEach(filter=>filter.addEventListener('click',()=>{
+  filterButtons.forEach(btn=>{btn.classList.remove('active');btn.setAttribute('aria-pressed','false')});
+  filter.classList.add('active');filter.setAttribute('aria-pressed','true');
+  const value=filter.dataset.filter;let visible=0;
+  menuCards.forEach(card=>{const show=value==='all'||card.dataset.category===value;card.classList.toggle('hidden',!show);if(show)visible++});
+  menuCount.textContent=visible+' позиций';
+}));
+
+const bookingForm=document.querySelector('#booking-form');
+const previewBooking=()=>bookingForm.querySelector('.success').classList.add('show');
+bookingForm.addEventListener('submit',event=>{event.preventDefault();previewBooking()});
+document.querySelector('#preview-booking').addEventListener('click',previewBooking);
+
+const cart=[];const cartDrawer=document.querySelector('#cart-drawer');const cartBackdrop=document.querySelector('#cart-backdrop');
+const cartItems=document.querySelector('#cart-items');const cartCount=document.querySelector('#cart-count');
+const cartTotal=document.querySelector('#cart-total');const cartToast=document.querySelector('#cart-toast');const cartMessage=document.querySelector('#cart-message');
+let toastTimer;
+const openCart=()=>openModal(cartDrawer);
+const closeCart=()=>{if(activeOverlay===cartDrawer)closeModal()};
+const renderCart=()=>{
+  cartCount.textContent=cart.reduce((sum,item)=>sum+item.qty,0);
+  const total=cart.reduce((sum,item)=>sum+item.qty*itemData[item.key].amount,0);
+  cartTotal.textContent=total+' ₽';
+  if(!cart.length){cartItems.innerHTML='<p class="cart-empty">Пока пусто. Выберите что-нибудь из меню.</p>';return}
+  cartItems.innerHTML=cart.map(item=>{const data=itemData[item.key];return `<div class="cart-row"><div><strong>${data.title}</strong><small>${item.qty} × ${data.price}</small><div class="qty-controls"><button class="qty-btn" type="button" data-minus="${item.key}" aria-label="Убрать одну порцию ${data.title}">−</button><button class="qty-btn" type="button" data-plus="${item.key}" aria-label="Добавить порцию ${data.title}">+</button></div></div><div class="cart-row-side"><b>${item.qty*data.amount} ₽</b></div></div>`}).join('');
+  cartItems.querySelectorAll('.qty-btn').forEach(button=>button.addEventListener('click',()=>{
+    const action=button.hasAttribute('data-minus')?'minus':'plus';
+    const key=button.dataset[action];
+    const index=cart.findIndex(item=>item.key===key);
+    if(index<0)return;
+    cart[index].qty+=action==='plus'?1:-1;
+    if(cart[index].qty===0)cart.splice(index,1);
+    cartMessage.textContent='';
+    renderCart();
+    const nextKey=cart[Math.min(index,cart.length-1)]?.key;
+    const target=cartItems.querySelector(`[data-${action}="${key}"]`)||cartItems.querySelector(`[data-minus="${nextKey}"]`)||document.querySelector('#cart-close');
+    target.focus({preventScroll:true});
+  }));
+};
+const showToast=()=>{clearTimeout(toastTimer);cartToast.classList.add('show');toastTimer=setTimeout(()=>cartToast.classList.remove('show'),1900)};
+const addToCart=key=>{if(!key)return;const existing=cart.find(item=>item.key===key);if(existing)existing.qty++;else cart.push({key,qty:1});cartMessage.textContent='';renderCart();openCart();showToast()};
+document.querySelector('#cart-toggle').addEventListener('click',()=>{cartDrawer.classList.contains('open')?closeCart():openCart()});
+cartBackdrop.addEventListener('click',closeCart);
+document.querySelector('#cart-close').addEventListener('click',closeCart);
+document.querySelector('#checkout-btn').addEventListener('click',()=>{
+  if(!cart.length){cartMessage.textContent='Корзина пуста. Сначала выберите что-нибудь из меню.';return}
+  cartMessage.textContent='Ничего не отправлено. Заказ не создан, оплата не проводилась. Это только демо-корзина.';
+});
+
+const reveal=document.querySelectorAll('.motion');
+if('IntersectionObserver' in window&&!matchMedia('(prefers-reduced-motion:reduce)').matches){
+  const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      entry.target.classList.remove('reveal-pending');
+      observer.unobserve(entry.target);
+    }
+  }),{threshold:.12});
+  reveal.forEach(element=>{element.classList.add('reveal-pending');observer.observe(element)});
+  window.setTimeout(()=>{
+    reveal.forEach(element=>element.classList.remove('reveal-pending'));
+    observer.disconnect();
+  },1600);
+}
+
+const counters=document.querySelectorAll('.fact-no[data-count]');
+const reducedMotion=matchMedia('(prefers-reduced-motion:reduce)');
+const counterDuration=320;
+if('IntersectionObserver' in window&&!reducedMotion.matches){
+  const states=new Map();
+  const finish=counter=>{
+    const state=states.get(counter);
+    cancelAnimationFrame(state.raf);
+    state.raf=0;
+    state.done=true;
+    counter.classList.remove('counting');
+    state.display.remove();
+    counterObserver.unobserve(counter);
+    if([...states.values()].every(item=>item.done)){
+      counterObserver.disconnect();
+      document.removeEventListener('visibilitychange',finishHidden);
+      window.removeEventListener('pagehide',finishAll);
+      reducedMotion.removeEventListener('change',finishReduced);
+    }
+  };
+  const finishAll=()=>states.forEach((state,counter)=>{if(!state.done)finish(counter)});
+  const finishHidden=()=>{if(document.hidden)states.forEach((state,counter)=>{if(state.started&&!state.done)finish(counter)})};
+  const finishReduced=()=>{if(reducedMotion.matches)finishAll()};
+  const counterObserver=new IntersectionObserver(entries=>entries.forEach(entry=>{
+    const counter=entry.target;
+    const state=states.get(counter);
+    if(state.done)return;
+    if(!entry.isIntersecting){if(state.started)finish(counter);return}
+    if(state.started||entry.intersectionRatio<.4||document.hidden)return;
+    if(reducedMotion.matches){finish(counter);return}
+    state.started=true;
+    const target=Number(counter.dataset.count);
+    const suffix=counter.dataset.suffix||'';
+    const start=performance.now();
+    state.display.textContent='0'+suffix;
+    counter.append(state.display);
+    counter.classList.add('counting');
+    const step=now=>{
+      if(document.hidden||reducedMotion.matches||!counter.checkVisibility()||counter.closest('[inert]')){finish(counter);return}
+      const progress=Math.min((now-start)/counterDuration,1);
+      if(progress===1){finish(counter);return}
+      state.display.textContent=Math.floor(target*(1-Math.pow(1-progress,3)))+suffix;
+      state.raf=requestAnimationFrame(step);
+    };
+    state.raf=requestAnimationFrame(step);
+  }),{threshold:[0,.4]});
+  counters.forEach(counter=>{
+    const display=document.createElement('span');
+    display.className='fact-count';
+    display.setAttribute('aria-hidden','true');
+    states.set(counter,{display,raf:0,started:false,done:false});
+    counterObserver.observe(counter);
+  });
+  document.addEventListener('visibilitychange',finishHidden);
+  window.addEventListener('pagehide',finishAll);
+  reducedMotion.addEventListener('change',finishReduced);
+}
+
+</script>
+</body>
+</html>
