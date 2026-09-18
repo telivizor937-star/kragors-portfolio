@@ -4,10 +4,10 @@
 <html lang="ru">
 
 <head>
-	<base href="./">
+
 	<meta charset="utf-8"/>
-	<meta name="Description" content="Барашек - демонстрационный макет. Ставрополь. Меню, фотографии и события; заказы и бронирование недоступны."/>
-	<meta name="format-detection" content="telephone=no"/>
+	<meta name="Description" content="Ресторан грузинской кухни Барашек в Ставрополе. На нашем сайте вы сможете познакомиться с полным меню ресторана, узнать свежие события, посмотреть фотографии, заказать еду ии забронировать столик."/>	<meta name="Keywords" content="ресторан в ставрополе лаваш"/>
+	<meta name="format-detection" content="telephone=yes"/>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
 	<link href="favicon.ico" rel="icon" type="image/x-icon" />
@@ -15,12 +15,10 @@
 	<link rel="stylesheet" href="css/style.css" media="all"/>
 	<link rel="stylesheet" href="css/media.css" media="all"/>
 	
-	<style>.loader{display:none!important;opacity:0!important}</style>
-	
-	<script src="lib.js" defer></script>
-	<script src="scroll.js" defer></script>
-	<script src="parallax.js" defer></script>
-	<script src="js/main.js" defer></script>
+	<script src="lib.js"></script>
+	<script src="scroll.js"></script>
+	<script src="parallax.js"></script>
+	<script src="js/main.js"></script>
 
 	<title>Ресторан "Барашек" в Ставрополе</title>
 
@@ -36,9 +34,9 @@
     </div>
     
     <div class="header_contacts_block">
-        <div class="address ibb anim_header" id="address"><address>Ставрополь</address>
+        <div class="address ibb anim_header" id="address"><address>Ставрополь<br>улица Мира, 285</address>
         </div>
-        <div class="telephone ibb tar anim_header" id="telephone">Дизайн-макет<br><a href="#demo-notice" data-demo>Демо-режим</a></div>
+        <div class="telephone ibb tar anim_header" id="telephone">Звоните нам<br><a href="tel:+78652230330">8-8652-230-330</a></div>
     </div>
     <div class="loader anim_header"></div>
     <div class="menu_page_wrapper">
@@ -161,7 +159,7 @@
 
 				<h3 class="board ibm"><span>Грузинское</span><br>застолье</h3><br>
 				<h2>Столик на ужин<br>для вас</h2>
-				<a href="#demo-notice" data-demo class="btn_line reservation-button">Забронировать</a>
+				<div class="btn_line reservation-button">Забронировать</div>
 
 			</div>
 
@@ -189,13 +187,13 @@
 				<div class="ibm">
 
 					<h2>Доставка еды на дом</h2>
-					<h3>Ставрополь · Демонстрация</h3>
+					<h3>По Ставрополю при заказе от <b>1&nbsp;000</b> рублей</h3>
 					<div class="dotted_line"></div>
-					<p style="margin-bottom:0;">Доставка не осуществляется</p>
-					<p style="margin-top:.2em;"><a href="#demo-notice" data-demo style="text-decoration:underline;">Заказать · демо</a></p>
+					<p style="margin-bottom:0;">Ежедневно с 11:00 до 23:00</p>
+					<p style="margin-top:.2em;">Заказать по телефону <a href="tel:+78652230330" style="text-decoration:underline;">8-8652-230-330</a></p>
 					<div style="display:inline-flex; flex-direction:column; gap:10px; align-items:stretch;">
-						<a href="#demo-notice" data-demo><div class="btn_border" style="display:block; text-align:center;">Скачать меню</div></a>
-						<a href="#demo-notice" data-demo><div class="btn_border" style="display:block; text-align:center;">Скачать обеды</div></a>
+						<a href="menu/pdf/menu.pdf" download target="_blank"><div class="btn_border" style="display:block; text-align:center;">Скачать меню</div></a>
+						<a href="menu/pdf/lunch.pdf" download target="_blank"><div class="btn_border" style="display:block; text-align:center;">Скачать обеды</div></a>
 					</div>
 
 				</div><div class="helper"></div>
@@ -250,13 +248,13 @@
 
 				<div class="contact_info">
 
-						<address>Ставрополь</address>
+						<address>Ставрополь<br>Улица Мира 285</address>
 						<div class="logotype tac ibm"><img src="images/logotype_white.png" alt="Ресторан Барашек" class="ibm"><div class="helper"></div></div>
-						<span>Демонстрационный макет<br>Контакты не подключены</span>
+						<span>8-8652-230-330<br>hello@barashek.example</span>
 
 				</div>
 
-				<a class="btn_border" href="contacts/index.html">Контакты · демо</a>
+				<div class="btn_border">Адрес на карте</div>
 
 			</div><div class="helper"></div>
 
@@ -272,7 +270,40 @@
 
 	<footer></footer>
 
-	<a class="local-prototype-tag local-portfolio-link" href="../../maxim-portfolio/maxim-portfolio.html">← В портфолио</a>
+	<div class="default-modal reservation-modal anim50_eo tal">
+	
+		<div class="helper"></div><div class="window ibm anim50_eo bbox">
+		
+			<div class="helper"></div><div class="holder ibm">
+			
+				<h2>Заказ столика</h2>
+				
+				<form>
+					<div class="input">Имя<input type="text" name="name-nec"/></div>
+					<br>
+					<div class="input">Номер телефона<input type="text" name="contact-phone-nec"/></div>
+					<br>
+					<label class="policy policy_book">
+						<input name="policy" type="checkbox" class="policy__input">
+						<div class="policy__text">Даю согласие на <a href="information/index.html" target="_blank">обработку персональных данных</a></div>
+					</label>
+					<div class="input"><p>Оставьте свои контактные данные, чтобы менеджер позвонил Вам в течение 10 минут и уточнил детали бронирования.</p></div>
+					<br>
+					<p class="feedback_error"></p>
+					<p class="order_error order_error-book"></p>
+					<div class="send_btn">Забронировать</div>
+				</form>
+				
+				<div class="close bg_con">
+					<i></i>
+					<i></i>
+				</div>
+			
+			</div>
+			
+		</div>
+		
+	</div>
 	
 	<div class="animate_position" id="animate_position">
 
@@ -289,7 +320,37 @@
 	</div>
 
 <script>
+	var feedbackParams = {
+		buttonSend: 'send_btn',
+		error: 'feedback_error',
+		action: 'feedback',
+		postParams: '',
+		successHandler: undefined,
+		errorMarkHandler: undefined,
+		successColor: 'white',
+		errorColor: 'red',
+		noDisable: false
+	}
+	new Feedback(document.querySelector('.default-modal.reservation-modal form'), feedbackParams);
 
+	function reservationModal(){
+		
+		var button = document.querySelector(".reservation-button");
+		var close = document.querySelector(".reservation-modal .close");
+		var body = document.body;
+		
+		function showModal(){
+			addClass(body,"modal_opened");
+		}
+		button.addEventListener("click", showModal, false);
+		
+		
+		function hideModal(){
+			removeClass(body,"modal_opened");
+		}
+		close.addEventListener("click", hideModal, false);
+		
+	}window.addEventListener("load", reservationModal, false);
 	
 	
 	// Определение браузера ==============================================
@@ -476,7 +537,7 @@
 				this.transform(pattern1, {translate: [scroll,0,0]});
 				this.transform(pattern2, {translate: [-scroll/2,0,0]});
 				order.style.opacity = 1 - scroll/100;
-				order.style.zIndex = scroll === 0 ? 3 : 1;
+				order.style.zIndex = 1;
 
 			}
 		},
@@ -800,7 +861,9 @@
 		}
 		window.addEventListener("load", no3dAnimation, false);
 
-
+		document.querySelector('.reservation-modal form').addEventListener('submit', function(){
+			
+		});
 		
 		</script>
 </body>
