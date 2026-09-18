@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Портфолио доктора Мии Рудневой - эстетическая стоматология, точная диагностика и спокойный сервис." />
+  <title>MIRA / DENTAL - портфолио</title>
+  <style>
+    :root {
+      --ink: #151515;
+      --muted: #777671;
+      --paper: #f4f2ed;
+      --card: #e8e5de;
+      --white: #fffdf9;
+      --blue: #275df5;
+      --blue-soft: #dfe7ff;
+      --lime: #d7f36b;
+      --line: rgba(21,21,21,.16);
+      --shadow: 0 18px 50px rgba(36, 32, 25, .09);
+      --radius: 20px;
+      --max: 1180px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--paper);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 16px;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-decoration: none; }
+    button, input, textarea { font: inherit; }
+    button { cursor: pointer; }
+    .wrap { width: min(calc(100% - 48px), var(--max)); margin: 0 auto; }
+    .eyebrow { display: flex; align-items: center; gap: 10px; color: var(--muted); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; font-weight: 750; }
+    .eyebrow::before { content: ""; width: 24px; height: 1px; background: currentColor; }
+    .site-header { position: sticky; top: 0; z-index: 10; background: rgba(244,242,237,.88); backdrop-filter: blur(16px); border-bottom: 1px solid rgba(21,21,21,.08); }
+    .nav { height: 78px; display: flex; align-items: center; justify-content: space-between; gap: 30px; }
+    .brand { display: inline-flex; align-items: center; gap: 11px; font-size: 14px; letter-spacing: .1em; font-weight: 850; }
+    .brand-mark { width: 28px; height: 28px; border-radius: 50%; background: var(--blue); position: relative; display: inline-grid; place-items: center; color: white; font-size: 14px; letter-spacing: 0; }
+    .brand-mark::after { content: ""; width: 9px; height: 9px; border: 1.5px solid var(--lime); border-radius: 50%; }
+    .nav-links { display: flex; gap: 26px; color: #5d5b56; font-size: 13px; font-weight: 650; }
+    .nav-links a { transition: color .2s ease; }
+    .nav-links a:hover { color: var(--blue); }
+    .nav-cta, .button { border: 0; border-radius: 999px; padding: 13px 18px; background: var(--ink); color: var(--white); font-size: 12px; font-weight: 800; letter-spacing: .02em; transition: transform .2s ease, background .2s ease; }
+    .nav-cta:hover, .button:hover { transform: translateY(-2px); background: var(--blue); }
+    .menu-toggle { display: none; border: 0; background: transparent; padding: 8px; }
+    .menu-toggle span { display: block; width: 22px; height: 2px; background: var(--ink); margin: 4px 0; }
+
+    .hero { padding: 74px 0 92px; overflow: hidden; }
+    .hero-grid { display: grid; grid-template-columns: 1.1fr .9fr; align-items: center; gap: 70px; }
+    .hero h1 { max-width: 720px; margin: 18px 0 22px; font-size: clamp(46px, 6.4vw, 88px); line-height: .96; letter-spacing: -.065em; font-weight: 840; }
+    .hero h1 em { color: var(--blue); font-family: Georgia, serif; font-weight: 400; letter-spacing: -.07em; }
+    .hero-copy { max-width: 490px; color: #5f5d58; font-size: 18px; line-height: 1.55; }
+    .hero-actions { display: flex; align-items: center; gap: 16px; margin-top: 32px; }
+    .button-primary { background: var(--blue); padding: 16px 22px; }
+    .button-primary:hover { background: var(--ink); }
+    .text-link { color: var(--ink); font-size: 13px; font-weight: 800; border-bottom: 1px solid var(--ink); padding-bottom: 3px; }
+    .hero-note { display: flex; align-items: center; gap: 9px; color: var(--muted); font-size: 12px; margin-top: 26px; }
+    .hero-note i { width: 7px; height: 7px; border-radius: 50%; background: #64b47b; box-shadow: 0 0 0 5px rgba(100,180,123,.14); }
+    .hero-visual { min-height: 500px; position: relative; }
+    .visual-frame { position: absolute; inset: 0 0 30px 30px; border: 1px solid var(--line); border-radius: 180px 180px 24px 24px; overflow: hidden; background: var(--blue); }
+    .visual-frame::before { content: ""; position: absolute; width: 390px; height: 390px; border-radius: 50%; background: var(--lime); top: -100px; right: -120px; opacity: .95; }
+    .visual-frame::after { content: ""; position: absolute; width: 310px; height: 310px; border-radius: 50%; border: 1px solid rgba(255,255,255,.5); bottom: -155px; left: -90px; }
+    .tooth-art { position: absolute; z-index: 1; width: 52%; left: 25%; top: 14%; filter: drop-shadow(18px 20px 0 rgba(21,21,21,.12)); }
+    .tooth-art path { fill: var(--white); stroke: var(--ink); stroke-width: 3; stroke-linejoin: round; }
+    .tooth-art circle { fill: var(--lime); stroke: var(--ink); stroke-width: 3; }
+    .stamp { position: absolute; z-index: 2; left: -13px; bottom: 72px; width: 104px; height: 104px; border-radius: 50%; background: var(--ink); color: var(--white); display: grid; place-items: center; text-align: center; font-size: 10px; line-height: 1.25; letter-spacing: .1em; text-transform: uppercase; transform: rotate(-11deg); }
+    .stamp strong { font-size: 22px; display: block; letter-spacing: -.04em; line-height: 1; color: var(--lime); }
+    .visual-caption { position: absolute; z-index: 2; bottom: 0; right: 0; display: flex; justify-content: space-between; width: calc(100% - 30px); color: var(--muted); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; }
+    .ticker { display: none; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 14px 0; overflow: hidden; white-space: nowrap; }
+    .ticker-track { display: inline-flex; gap: 36px; color: var(--muted); font-size: 11px; font-weight: 750; letter-spacing: .12em; text-transform: uppercase; }
+    .ticker-track b { color: var(--blue); font-size: 16px; line-height: 0; }
+
+    section { padding: 110px 0; }
+    .section-head { display: flex; justify-content: space-between; align-items: end; gap: 30px; margin-bottom: 46px; }
+    .section-title { margin: 15px 0 0; max-width: 630px; font-size: clamp(32px, 4.2vw, 56px); line-height: 1.03; letter-spacing: -.055em; }
+    .section-intro { max-width: 300px; color: var(--muted); font-size: 14px; }
+    .about-grid { display: grid; grid-template-columns: .95fr 1.05fr; gap: 80px; align-items: start; }
+    .about-lead { font-size: clamp(27px, 3vw, 41px); line-height: 1.08; letter-spacing: -.05em; margin: 0; }
+    .about-lead em { font-family: Georgia, serif; font-weight: 400; color: var(--blue); }
+    .about-text { color: var(--muted); max-width: 500px; }
+    .stats { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--line); margin-top: 44px; padding-top: 22px; gap: 20px; }
+    .stat-number { font-size: 33px; letter-spacing: -.06em; font-weight: 820; }
+    .stat-label { color: var(--muted); font-size: 12px; line-height: 1.3; margin-top: 4px; }
+    .principles { display: grid; gap: 0; border-top: 1px solid var(--line); }
+    .principle { display: grid; grid-template-columns: 48px 1fr; gap: 24px; padding: 21px 0; border-bottom: 1px solid var(--line); }
+    .principle-no { color: var(--blue); font-size: 12px; font-weight: 800; }
+    .principle h3 { margin: 0 0 5px; font-size: 18px; letter-spacing: -.02em; }
+    .principle p { color: var(--muted); margin: 0; font-size: 14px; }
+
+    .work-section { background: var(--ink); color: var(--white); }
+    .work-section .eyebrow, .work-section .section-intro { color: rgba(255,255,255,.56); }
+    .work-section .section-title { color: var(--white); }
+    .cases { display: grid; grid-template-columns: 1.15fr .85fr; gap: 18px; }
+    .case { position: relative; overflow: hidden; border-radius: var(--radius); min-height: 430px; padding: 26px; display: flex; flex-direction: column; justify-content: space-between; }
+    .case-large { background: #c9d7ff; color: var(--ink); }
+    .case-small { background: #d7f36b; color: var(--ink); min-height: 206px; }
+    .case-stack { display: grid; gap: 18px; }
+    .case-meta { display: flex; justify-content: space-between; position: relative; z-index: 2; font-size: 11px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+    .case h3 { position: relative; z-index: 2; margin: 0; font-size: 27px; line-height: 1.04; letter-spacing: -.045em; max-width: 230px; }
+    .case p { position: relative; z-index: 2; margin: 8px 0 0; color: rgba(21,21,21,.6); font-size: 13px; }
+    .smile-visual { position: absolute; right: 5%; bottom: -9%; width: 62%; }
+    .smile-visual path { fill: none; stroke: var(--blue); stroke-width: 15; stroke-linecap: round; }
+    .smile-visual path:last-child { stroke: var(--white); stroke-width: 7; }
+    .grid-visual { position: absolute; inset: 0; opacity: .32; background-image: linear-gradient(rgba(21,21,21,.3) 1px, transparent 1px), linear-gradient(90deg, rgba(21,21,21,.3) 1px, transparent 1px); background-size: 31px 31px; mask-image: linear-gradient(to top right, black, transparent 68%); }
+    .case-orbit { position: absolute; right: 8%; top: 13%; width: 135px; height: 135px; border: 1px solid rgba(21,21,21,.45); border-radius: 50%; }
+    .case-orbit::before, .case-orbit::after { content: ""; position: absolute; inset: 18px; border: 1px solid rgba(21,21,21,.3); border-radius: 50%; }
+    .case-orbit::after { inset: -10px 38px; transform: rotate(45deg); }
+
+    .services { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .service { background: var(--white); border: 1px solid var(--line); border-radius: var(--radius); padding: 26px; min-height: 245px; display: flex; flex-direction: column; justify-content: space-between; transition: transform .25s ease, border-color .25s ease; }
+    .service:hover { transform: translateY(-5px); border-color: var(--blue); }
+    .service-icon { width: 40px; height: 40px; background: var(--blue-soft); color: var(--blue); border-radius: 50%; display: grid; place-items: center; font-weight: 850; font-size: 13px; }
+    .service h3 { margin: 32px 0 8px; font-size: 21px; letter-spacing: -.04em; }
+    .service p { color: var(--muted); font-size: 13px; margin: 0; }
+    .service-arrow { align-self: end; font-size: 20px; color: var(--blue); }
+
+    .quote-section { padding-top: 25px; }
+    .quote-card { background: var(--blue); color: var(--white); border-radius: var(--radius); padding: 50px 58px; display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: end; }
+    blockquote { margin: 0; font-size: clamp(28px, 4vw, 52px); line-height: 1.01; letter-spacing: -.055em; }
+    blockquote em { color: var(--lime); font-family: Georgia, serif; font-weight: 400; }
+    .quote-credit { color: rgba(255,255,255,.68); border-left: 1px solid rgba(255,255,255,.35); padding-left: 24px; font-size: 14px; }
+    .quote-credit strong { display: block; color: white; margin-bottom: 4px; }
+
+    .faq-grid { display: grid; grid-template-columns: .8fr 1.2fr; gap: 80px; }
+    .faq-note { color: var(--muted); max-width: 260px; font-size: 14px; }
+    .faq-item { border-top: 1px solid var(--line); }
+    .faq-item:last-child { border-bottom: 1px solid var(--line); }
+    .faq-q { width: 100%; padding: 22px 0; display: flex; justify-content: space-between; gap: 20px; border: 0; background: transparent; color: var(--ink); text-align: left; font-size: 16px; font-weight: 750; }
+    .faq-q span { width: 22px; height: 22px; border-radius: 50%; background: var(--ink); color: var(--white); display: grid; place-items: center; font-size: 17px; line-height: 1; transition: transform .2s ease; }
+    .faq-a { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .25s ease; }
+    .faq-a > div { overflow: hidden; color: var(--muted); font-size: 14px; }
+    .faq-item.open .faq-a { grid-template-rows: 1fr; }
+    .faq-item.open .faq-q span { transform: rotate(45deg); }
+    .faq-item.open .faq-a > div { padding-bottom: 22px; }
+
+    .contact { background: var(--lime); padding: 74px 0; }
+    .contact-grid { display: grid; grid-template-columns: 1fr .8fr; gap: 80px; align-items: end; }
+    .contact h2 { max-width: 650px; margin: 15px 0 24px; font-size: clamp(42px, 6vw, 78px); line-height: .96; letter-spacing: -.065em; }
+    .contact h2 em { font-family: Georgia, serif; font-weight: 400; }
+    .contact-copy { color: rgba(21,21,21,.62); max-width: 370px; }
+    .contact-form { display: grid; gap: 12px; }
+    .contact-form input { width: 100%; border: 0; border-bottom: 1px solid rgba(21,21,21,.35); background: transparent; padding: 15px 0; outline: none; color: var(--ink); }
+    .contact-form input::placeholder { color: rgba(21,21,21,.55); }
+    .contact-form input:focus { border-color: var(--blue); }
+    .contact-form .button { justify-self: start; margin-top: 12px; }
+    .form-note { margin: 0; color: rgba(21,21,21,.55); font-size: 11px; }
+    .success { display: none; color: var(--blue); font-weight: 800; font-size: 14px; }
+
+    footer { background: var(--ink); color: var(--white); padding: 26px 0; }
+    .footer-row { display: flex; justify-content: space-between; align-items: center; gap: 20px; font-size: 12px; color: rgba(255,255,255,.6); }
+    .footer-row .brand { color: var(--white); }
+    .footer-links { display: flex; gap: 20px; }
+    .footer-links a:hover { color: var(--lime); }
+
+    @media (max-width: 800px) {
+      .wrap { width: min(calc(100% - 32px), var(--max)); }
+      .nav { height: 68px; }
+      .nav-links, .nav-cta { display: none; }
+      .menu-toggle { display: block; }
+      .nav-links.open { position: absolute; display: grid; gap: 0; top: 68px; left: 0; right: 0; padding: 10px 16px 16px; background: var(--paper); border-bottom: 1px solid var(--line); }
+      .nav-links.open a { padding: 12px 0; }
+      .hero { padding: 52px 0 74px; }
+      .hero-grid, .about-grid, .faq-grid, .contact-grid { grid-template-columns: 1fr; gap: 42px; }
+      .hero h1 { font-size: clamp(45px, 15vw, 74px); }
+      .hero-copy { font-size: 16px; }
+      .hero-visual { min-height: 390px; }
+      .visual-frame { inset: 0 0 26px 16px; }
+      .tooth-art { width: 58%; left: 21%; top: 14%; }
+      section { padding: 76px 0; }
+      .section-head { display: block; margin-bottom: 30px; }
+      .section-intro { margin-top: 20px; }
+      .stats { margin-top: 32px; }
+      .cases { grid-template-columns: 1fr; }
+      .case-large { min-height: 360px; }
+      .services { grid-template-columns: 1fr; }
+      .service { min-height: 205px; }
+      .quote-card { grid-template-columns: 1fr; padding: 34px 26px; gap: 26px; }
+      .quote-credit { border-left: 0; border-top: 1px solid rgba(255,255,255,.35); padding: 20px 0 0; }
+      .contact-grid { gap: 26px; }
+      .footer-row { align-items: flex-start; flex-direction: column; }
+    }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; } }
+  
+    /* subtle motion layer */
+    @keyframes siteFloat { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+    @keyframes sitePulse { 0%,100% { box-shadow: 0 0 0 0 rgba(255,255,255,0); } 50% { box-shadow: 0 14px 36px rgba(0,0,0,.14); } }
+    .hero-visual, .visual, .hero-art { animation: siteFloat 8s ease-in-out infinite; }
+    .visual-frame, .building-frame, .window-stage { animation: sitePulse 7s ease-in-out infinite; }
+    .motion-reveal { opacity: 0; transform: translateY(24px); transition: opacity .8s ease, transform .8s cubic-bezier(.2,.7,.2,1); }
+    .motion-reveal.motion-visible { opacity: 1; transform: none; }
+    .service, .case, .project { transition: transform .3s cubic-bezier(.2,.7,.2,1), box-shadow .3s ease, border-color .25s ease; }
+    .case:hover, .project:hover { transform: translateY(-7px); box-shadow: 0 18px 42px rgba(0,0,0,.16); }
+    @media (prefers-reduced-motion: reduce) {
+      .hero-visual, .visual, .hero-art, .visual-frame, .building-frame, .window-stage { animation: none; }
+      .motion-reveal { opacity: 1; transform: none; transition: none; }
+    }
+
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap nav">
+      <a class="brand" href="#top" aria-label="Mira Dental, наверх"><span class="brand-mark" aria-hidden="true"></span>MIRA / DENTAL</a>
+      <nav class="nav-links" aria-label="Основная навигация">
+        <a href="#about">О подходе</a>
+        <a href="#cases">Работы</a>
+        <a href="#services">Услуги</a>
+        <a href="#contact">Контакты</a>
+      </nav>
+      <a class="nav-cta" href="#contact">Записаться</a>
+      <button class="menu-toggle" aria-label="Открыть меню" aria-expanded="false"><span></span><span></span></button>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div>
+          <div class="eyebrow">Эстетическая стоматология / 01</div>
+          <h1>Улыбка,<br>которая <em>остаётся</em><br>вашей.</h1>
+          <p class="hero-copy">Я - доктор Мия Руднева. Собираю естественные улыбки на стыке медицины, эстетики и внимательного диалога.</p>
+          <div class="hero-actions"><a class="button button-primary" href="#contact">Обсудить улыбку <span aria-hidden="true">↗</span></a><a class="text-link" href="#cases">Смотреть работы</a></div>
+          <div class="hero-note"><i aria-hidden="true"></i> Сейчас принимаю новые кейсы на октябрь</div>
+        </div>
+        <div class="hero-visual" aria-label="Абстрактная иллюстрация зуба">
+          <div class="visual-frame">
+            <svg class="tooth-art" viewBox="0 0 260 330" role="img" aria-label="Линия зуба">
+              <path d="M130 25c-31 0-41 18-60 18-14 0-30-8-42 5C10 67 26 105 30 129c5 30-1 70 14 112 10 28 24 55 43 54 18-1 22-27 27-49 4-18 10-32 16-32s12 14 16 32c5 22 9 48 27 49 19 1 33-26 43-54 15-42 9-82 14-112 4-24 20-62 2-81-12-13-28-5-42-5-19 0-29-18-60-18z" />
+              <circle cx="130" cy="116" r="22" />
+            </svg>
+            <div class="stamp"><div><strong>m</strong>точность<br>в деталях</div></div>
+          </div>
+          <div class="visual-caption"><span>studio note / 2026</span><span>55°20' N</span></div>
+        </div>
+      </div>
+    </section>
+
+    <div class="ticker" aria-label="Философия бренда"><div class="ticker-track"><span>Естественность</span><b>✳</b><span>Точность</span><b>✳</b><span>Мягкий сервис</span><b>✳</b><span>Естественность</span><b>✳</b><span>Точность</span><b>✳</b><span>Мягкий сервис</span></div></div>
+
+    <section id="about">
+      <div class="wrap about-grid">
+        <div><div class="eyebrow">О подходе</div><p class="about-lead">Без шаблонных улыбок. Только <em>ваша</em> анатомия, характер и тот самый баланс.</p><div class="stats"><div><div class="stat-number">8+</div><div class="stat-label">лет практики</div></div><div><div class="stat-number">420</div><div class="stat-label">завершённых кейсов</div></div><div><div class="stat-number">4,9</div><div class="stat-label">средняя оценка</div></div></div></div>
+        <div><p class="about-text">Стоматология для меня - не про «идеально белое». Она про ощущение, когда вы улыбаетесь и не думаете о том, как это выглядит. Диагностика, прозрачный план и работа, которую не нужно объяснять.</p><div class="principles"><div class="principle"><div class="principle-no">01</div><div><h3>Сначала слушаю</h3><p>Понимаю ваш ритм жизни и ожидания ещё до снимка.</p></div></div><div class="principle"><div class="principle-no">02</div><div><h3>Показываю маршрут</h3><p>Объясняю варианты простым языком - без давления и сюрпризов.</p></div></div><div class="principle"><div class="principle-no">03</div><div><h3>Сохраняю естественное</h3><p>Работаю минимально инвазивно и с уважением к вашей анатомии.</p></div></div></div></div>
+      </div>
+    </section>
+
+    <section id="cases" class="work-section">
+      <div class="wrap">
+        <div class="section-head"><div><div class="eyebrow">Избранные кейсы</div><h2 class="section-title">Тихие изменения.<br>Заметный эффект.</h2></div><p class="section-intro">Три истории о том, как точная работа возвращает желание улыбаться чаще.</p></div>
+        <div class="cases">
+          <article class="case case-large"><div class="case-meta"><span>Кейс 01 / виниры</span><span>12 недель</span></div><div><h3>Мягкая геометрия для новой уверенности</h3><p>12 керамических реставраций · сохранение естественной прозрачности</p></div><svg class="smile-visual" viewBox="0 0 500 220" aria-hidden="true"><path d="M35 88c92 119 323 144 430-3"/><path d="M76 98c90 78 256 99 349-3"/></svg></article>
+          <div class="case-stack"><article class="case case-small"><div class="case-meta"><span>Кейс 02 / имплантация</span><span>16 недель</span></div><div><h3>Вернуть опору - сохранить лицо</h3><p>Комплексная реабилитация</p></div><div class="grid-visual"></div></article><article class="case case-small"><div class="case-meta"><span>Кейс 03 / отбеливание</span><span>3 визита</span></div><div><h3>Свет, который выглядит естественно</h3><p>Персональный протокол без перегиба</p></div><div class="case-orbit"></div></article></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="services">
+      <div class="wrap"><div class="section-head"><div><div class="eyebrow">Направления</div><h2 class="section-title">Всё, чтобы<br>улыбаться <em>своим</em> голосом.</h2></div><p class="section-intro">От первой консультации до финального блеска - один спокойный маршрут.</p></div><div class="services"><article class="service"><div><div class="service-icon">01</div><h3>Эстетическая<br>реставрация</h3><p>Виниры, композитные реставрации и гармонизация формы.</p></div><div class="service-arrow">↗</div></article><article class="service"><div><div class="service-icon">02</div><h3>Функциональная<br>стоматология</h3><p>Прикус, сустав и комфорт, который начинается с диагностики.</p></div><div class="service-arrow">↗</div></article><article class="service"><div><div class="service-icon">03</div><h3>Здоровье<br>на каждый день</h3><p>Профилактика и гигиена без чувства вины и лишних процедур.</p></div><div class="service-arrow">↗</div></article></div></div>
+    </section>
+
+    <section class="quote-section"><div class="wrap"><div class="quote-card"><blockquote>«Самое красивое - когда результат выглядит <em>не сделанным</em>.»</blockquote><div class="quote-credit"><strong>Доктор Мия Руднева</strong>Основатель MIRA / DENTAL<br>Москва · приём по предварительной записи</div></div></div></section>
+
+    <section><div class="wrap faq-grid"><div><div class="eyebrow">Перед визитом</div><h2 class="section-title">Спокойствие<br>тоже часть<br><em>лечения.</em></h2><p class="faq-note">Собрала ответы на вопросы, которые чаще всего задают перед первой встречей.</p></div><div class="faq"><div class="faq-item open"><button class="faq-q" aria-expanded="true">Как проходит первая консультация?<span>+</span></button><div class="faq-a"><div>Около 60 минут: знакомимся, обсуждаем запрос, делаем диагностику и собираем понятный план. Вы уходите не с «надо подумать», а с конкретными вариантами.</div></div></div><div class="faq-item"><button class="faq-q" aria-expanded="false">Можно ли начать с малого?<span>+</span></button><div class="faq-a"><div>Да. Мы можем начать с профессиональной гигиены, диагностики или небольшой эстетической коррекции - без обязательств на большой план.</div></div></div><div class="faq-item"><button class="faq-q" aria-expanded="false">Где проходит приём?<span>+</span></button><div class="faq-a"><div>В камерной студии MIRA / DENTAL в центре Москвы. Точный адрес и детали отправим после подтверждения записи.</div></div></div><div class="faq-item"><button class="faq-q" aria-expanded="false">Сколько стоит работа?<span>+</span></button><div class="faq-a"><div>Стоимость зависит от задачи и становится понятной после диагностики. На консультации вы получаете смету по каждому этапу.</div></div></div></div></div></section>
+
+    <section id="contact" class="contact"><div class="wrap contact-grid"><div><div class="eyebrow">Следующий шаг</div><h2>Готовы познакомиться со своей <em>новой улыбкой?</em></h2><p class="contact-copy">Оставьте контакты - я бережно вернусь к вам в течение рабочего дня и предложу время для первой встречи.</p></div><form class="contact-form"><input aria-label="Ваше имя" name="name" placeholder="Ваше имя" required /><input aria-label="Телефон или Telegram" name="contact" placeholder="Телефон или @telegram" required /><button class="button" type="submit">Запросить консультацию ↗</button><p class="form-note">Нажимая на кнопку, вы соглашаетесь на обработку данных.</p><p class="success" role="status">Спасибо - заявка принята. Я скоро свяжусь с вами.</p></form></div></section>
+  </main>
+  <footer><div class="wrap footer-row"><a class="brand" href="#top"><span class="brand-mark" aria-hidden="true"></span>MIRA / DENTAL</a><div>© 2026 · эстетическая стоматология</div><div class="footer-links"><a href="#cases">Работы</a><a href="#contact">Запись</a></div></div></footer>
+
+  <script>
+    const menu = document.querySelector('.menu-toggle');
+    const links = document.querySelector('.nav-links');
+    menu.addEventListener('click', () => { const open = links.classList.toggle('open'); menu.setAttribute('aria-expanded', open); });
+    links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { links.classList.remove('open'); menu.setAttribute('aria-expanded', 'false'); }));
+    document.querySelectorAll('.faq-q').forEach(button => button.addEventListener('click', () => { const item = button.closest('.faq-item'); const isOpen = item.classList.toggle('open'); button.setAttribute('aria-expanded', isOpen); }));
+    document.querySelector('.contact-form').addEventListener('submit', (event) => { event.preventDefault(); event.currentTarget.querySelector('.success').style.display = 'block'; event.currentTarget.querySelector('button').textContent = 'Заявка отправлена ✓'; event.currentTarget.querySelector('button').disabled = true; });
+  </script>
+
+  <script>
+    (() => {
+      const targets = document.querySelectorAll('section:not(.hero) .section-head, section:not(.hero) .services, section:not(.hero) .project-grid, section:not(.hero) .process-grid, section:not(.hero) .quote-card, section:not(.hero) .faq-grid, section:not(.hero) .contact-grid');
+      targets.forEach((el, index) => { el.classList.add('motion-reveal'); el.style.transitionDelay = `${Math.min(index * 70, 280)}ms`; });
+      const observer = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('motion-visible'); obs.unobserve(entry.target); } });
+      }, { threshold: .12 });
+      targets.forEach(el => observer.observe(el));
+    })();
+  </script>
+
+</body>
+</html>
