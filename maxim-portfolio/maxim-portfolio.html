@@ -429,16 +429,16 @@ const t0=performance.now();
 const markLoaded=()=>{loaded=true};
 addEventListener('load',markLoaded,{once:true});
 document.fonts?.ready.then(markLoaded);
-setTimeout(markLoaded,3400);
+setTimeout(markLoaded,1800);
 const pad=n=>String(Math.round(n)).padStart(3,'0');
 const tickLoader=()=>{
 const target=loaded?100:Math.min(progress,92);
-progress+=(target-progress)*(loaded?.09:.028);
+progress+=(target-progress)*(loaded?.18:.06);
 counter.textContent=pad(progress);
 bar.style.transform='scaleX('+(progress/100)+')';
 loader.setAttribute('aria-valuenow',Math.round(progress));
-if(progress>=92&&performance.now()-t0<3300)progress=92;
-if(progress>=99.6&&performance.now()-t0>3300){finishLoader();return}
+if(progress>=92&&performance.now()-t0<1600)progress=92;
+if(progress>=99.6&&performance.now()-t0>1600){finishLoader();return}
 requestAnimationFrame(tickLoader);
 };
 const finishLoader=()=>{
@@ -576,7 +576,7 @@ const pmrem=new THREE.PMREMGenerator(renderer);
 scene.environment=pmrem.fromEquirectangular(tex).texture;
 const knot=new THREE.Mesh(
 new THREE.TorusKnotGeometry(.62,.30,240,36),
-new THREE.MeshPhysicalMaterial({color:0xffffff,roughness:.05,metalness:1,clearcoat:1,clearcoatRoughness:.04,envMapIntensity:1.5})
+new THREE.MeshPhysicalMaterial({color:0xffffff,roughness:.03,metalness:0,transmission:1,thickness:1.2,ior:1.5,clearcoat:1,clearcoatRoughness:.02,envMapIntensity:1.2})
 );
 window.__sceneDebug={knot,renderer,scene,camera};
 scene.add(knot);
