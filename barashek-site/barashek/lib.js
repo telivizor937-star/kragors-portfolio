@@ -97,6 +97,7 @@ function ImageLoader(rule) {
 	[].forEach.call(images, function (el) {
 		_this.images.push(el);
 		el.imageURL = el.src;
+		el.src = '';
 	});
 }
 ImageLoader.prototype = {

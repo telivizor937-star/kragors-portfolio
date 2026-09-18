@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="description" content="Меню грузинской кухни. Все блюда в аасортименте." />
-    <meta name="format-detection" content="telephone=no" />
+    <meta name="format-detection" content="telephone=yes" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <link href="../favicon.ico" rel="icon" type="image/x-icon" />
@@ -36,9 +36,9 @@
     </div>
     
     <div class="header_contacts_block">
-        <div class="address ibb anim_header" id="address"><address>Ставрополь</address>
+        <div class="address ibb anim_header" id="address"><address>Ставрополь<br>улица Мира, 285</address>
         </div>
-        <div class="telephone ibb tar anim_header" id="telephone">Дизайн-макет<br><a href="#demo-notice" data-demo>Демо-режим</a></div>
+        <div class="telephone ibb tar anim_header" id="telephone">Звоните нам<br><a href="tel:+78652230330">8-8652-230-330</a></div>
     </div>
     <div class="loader anim_header"></div>
     <div class="menu_page_wrapper">
@@ -141,9 +141,9 @@
         <div class="helper"></div><div class="ibm">
             <div class="menu_logo"></div>
             <h1 style="margin:30px 0 10px;">Основное меню</h1>
-            <p class="order_by_phone"><a href="#demo-notice" data-demo style="color:inherit; text-decoration:underline;">Заказать · демо</a></p>
-            <a href="#demo-notice" data-demo style="text-decoration:none;"><div class="menu_view menu-button">Скачать меню</div></a>
-            <a href="#demo-notice" data-demo style="text-decoration:none; margin-left:10px;"><div class="menu_view menu-button">Скачать обеды</div></a>
+            <p class="order_by_phone">Заказать по телефону <a href="tel:+78652230330" style="color:inherit; text-decoration:underline;">8-8652-230-330</a></p>
+            <a href="pdf/menu.pdf" onclick="menuDownload()" download target="_blank" style="text-decoration:none;"><div class="menu_view menu-button">Скачать меню</div></a>
+            <a href="pdf/lunch.pdf" onclick="menuDownload()" download target="_blank" style="text-decoration:none; margin-left:10px;"><div class="menu_view menu-button">Скачать обеды</div></a>
         </div>
     </section>
 
@@ -154,7 +154,7 @@
             <div class="menu_view bar-button" onclick="showDrinks()">Посмотреть</div>
         </div>
         <div class="menu_info">
-            <p>52 наименования</p> <a href="#demo-notice" data-demo class="menu_download">Скачать PDF</a> </div>
+            <p>52 наименования</p> <a href="pdf/bar_menu.pdf" onclick="menuDownload()" class="menu_download" download target="_blank">Скачать PDF</a> </div>
     </section>
 
 
@@ -3181,7 +3181,7 @@
     <section class="overflow_drink_menu menu_display_none">
         <div class="bar_header">
     <h2>Безалкогольные напитки</h2>
-    <h3>Демонстрация · заказы недоступны</h3>
+    <h3>Можно заказать с доставкой</h3>
 </div>
 <div class="bar_block">
     <div class="bar_block_title">
@@ -3469,7 +3469,7 @@
 
     </section>
     <aside class="aside_menu">
-        <a href="#demo-notice" data-demo>
+        <a href="../dostavka_edy/index.html">
             <div class="buy_icon"><i></i> </div>
             <p>Сумма заказа
                 <br><b class="result_price">0  рублей</b> </p>
@@ -3479,7 +3479,7 @@
         <div class="close_aside" onclick="hideMenu()"> <i></i><i></i> </div>
     </aside>
     <div class="aside_links">
-        <a href="#demo-notice" data-demo class="aside_download"><i></i>
+        <a href="pdf/menu.pdf" download target="_blank" class="aside_download"><i></i>
             <p>Скачать меню
                 <br>в PDF, 9.81 Мб</p>
         </a>
@@ -3534,10 +3534,53 @@
 
     function getCartHandler(action, elem) {
         return function (e) {
-            e.preventDefault();
             e.stopPropagation();
-            window.showDemoNotice(elem);
-        };
+            if(e.target.parentNode.classList.contains("off-standart-behavior") )return;
+            var currentId = elem.getAttribute('data-id');
+            var currentBtn = elem.children[0];
+            var ajax = new Ajax();
+
+            currentBtn.sending = true;
+
+            var numb = currentBtn.getElementsByClassName('cnt')[0].children[0];
+
+            currentBtn.classList.add('sending');
+            currentBtn.children[1].children[0].classList.add('start_load');
+
+            ajax.data = {curid: currentId, action: action};
+            ajax.success = function(obj) {
+                buyIcon.innerHTML = obj.count;
+                resultPrice.innerHTML = obj.amount;
+                buyIcon.classList.add('scale_buy_icon');
+                setTimeout( function() {buyIcon.classList.remove('scale_buy_icon')},300);
+                currentBtn.sending = false;
+                //убираем лоадер
+                currentBtn.classList.remove('sending');
+                currentBtn.children[1].children[0].classList.remove('start_load');
+
+                if(action == 'add_to_cart') {
+                    if(!numb.innerHTML) {
+                        numb.innerHTML = 1;
+                        currentBtn.classList.add('counting');
+                    }
+                    else numb.innerHTML = parseFloat(numb.innerHTML) + 1;
+
+                }
+                else if(action == 'minus_from_cart'){
+                    var count = parseFloat(numb.innerHTML) - 1;
+                    if(count <= 0) {
+                        count = '';
+                        currentBtn.classList.remove('counting');
+                    }
+                    if(numb.innerHTML) numb.innerHTML = count;
+                }
+                else if(action == 'remove_from_cart') {
+                    numb.innerHTML = '';
+                    currentBtn.classList.remove('counting');
+                }
+            }
+            ajax.exec();
+        }
     }
 
     // статус скролла
@@ -3608,12 +3651,15 @@
         leftPart.classList.remove('menu_display_none');
         main.classList.remove('set_fixed_position');
 
+        setTimeout(function(){
+            checkGoalsAddButton();
+        }, 810)
 
         nextBtn.removeEventListener('click', nextFood, false);
         nextBtn.addEventListener('click', nextDrinks, false);
         nextBtn.children[0].innerHTML = 'Напитки';
 
-        asideDownload.setAttribute('href', '#demo-notice');
+        asideDownload.setAttribute('href', 'pdf/menu.pdf');
         asideDownload.children[1].innerHTML = 'Скачать меню<br>в PDF, 9.81 Мб';
 
         window.removeEventListener('scroll', scrollMenu, false);
@@ -3624,6 +3670,16 @@
 
     }
 
+    function checkGoalsAddButton(){
+        var buttonsAdd = document.querySelectorAll('.btn_holder i:first-child');
+
+        for(var i = 0; i < buttonsAdd.length; i++){
+            buttonsAdd[i].addEventListener('click', function(){
+                
+                fbq('track', 'AddToCart');
+            });
+        }
+    }
 
     function showDrinks() {
 
@@ -3644,7 +3700,7 @@
         nextBtn.addEventListener('click', nextFood, false);
         nextBtn.children[0].innerHTML = 'Основное меню';
 
-        asideDownload.setAttribute('href', '#demo-notice');
+        asideDownload.setAttribute('href', 'pdf/bar_menu.pdf');
         asideDownload.children[1].innerHTML = 'Скачать меню<br>в PDF, 5.4 Мб';
 
         Parallax.pause = true;
@@ -3689,7 +3745,7 @@
         nextBtn.addEventListener('click', nextDrinks, false);
         nextBtn.children[0].innerHTML = 'Напитки';
 
-        asideDownload.setAttribute('href', '#demo-notice');
+        asideDownload.setAttribute('href', 'pdf/menu.pdf');
         asideDownload.children[1].innerHTML = 'Скачать меню<br>в PDF, 9.81 Мб';
 
         Parallax.pause = false;
@@ -3711,7 +3767,7 @@
         nextBtn.addEventListener('click', nextFood, false);
         nextBtn.children[0].innerHTML = 'Основное меню';
 
-        asideDownload.setAttribute('href', '#demo-notice');
+        asideDownload.setAttribute('href', 'pdf/bar_menu.pdf');
         asideDownload.children[1].innerHTML = 'Скачать меню<br>в PDF, 5.4 Мб';
 
         Parallax.pause = true;
