@@ -1,9 +1,4 @@
 *.zip
-*.png
-*.jpg
-*.jpeg
-*.webp
-*.pdf
 .vscode/
 .idea/
 .DS_Store
