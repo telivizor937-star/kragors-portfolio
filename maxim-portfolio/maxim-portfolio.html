@@ -24,8 +24,8 @@ a,button{-webkit-tap-highlight-color:transparent}
 .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
 .skip{position:fixed;top:10px;left:10px;z-index:1200;transform:translateY(-180%);padding:12px 20px;background:var(--ink);color:#fff;border-radius:8px}
 .skip:focus{transform:none}
-.site-loader{z-index:1100;background:var(--ink);color:var(--bg);clip-path:inset(0);grid-template-rows:auto 1fr auto;padding:28px 40px 24px;transition:clip-path .85s var(--snap);display:grid;position:fixed;inset:0;overflow:hidden}
-.site-loader[data-phase=exiting]{clip-path:inset(0 0 100%);pointer-events:none}
+.site-loader{z-index:1100;background:var(--ink);color:var(--bg);clip-path:inset(0);grid-template-rows:auto 1fr auto;padding:28px 40px 24px;transition:clip-path .85s var(--snap),transform .8s var(--snap);display:grid;position:fixed;inset:0;overflow:hidden}
+.site-loader[data-phase=exiting]{clip-path:inset(0 0 100%);transform:translateY(-100%);pointer-events:none}
 .site-loader[data-phase=done]{display:none}
 html:not(.js) .site-loader{display:none}
 .site-loader__topline,.site-loader__bottom{z-index:2;letter-spacing:.09em;text-transform:uppercase;justify-content:space-between;align-items:center;font-size:11px;font-weight:600;display:flex;position:relative}
@@ -85,11 +85,11 @@ html.js .hero.scene-live .hero-fallback{display:none}
 .about__header:before{width:calc(var(--p)*100%);background:var(--ink);content:"";height:1px;position:absolute;top:-1px;left:0}
 .about__index{color:var(--accent)}
 .about__statement{z-index:2;align-items:center;padding:3vh 0 2vh;display:flex;position:relative}
-.about__copy{font-family:Georgia,'Times New Roman',serif;font-weight:600;letter-spacing:-.015em;line-height:1.08;width:min(100%,1100px);margin:0 auto;font-size:clamp(2.4rem,4.6vw,5.2rem);text-wrap:balance}
+.about__copy{font-family:"Segoe UI",system-ui,sans-serif;font-weight:900;letter-spacing:-.028em;text-transform:uppercase;line-height:.86;width:min(100%,1100px);margin:0 auto;font-size:clamp(56px,9.6vw,150px);text-wrap:balance}
 html.js .about__word{color:var(--muted-ink);transition:color .3s}
 html.js .about__word.on{color:var(--ink)}
 .about__statement,.about__copy{min-width:0}
-.about__copy{line-height:1.06;overflow-wrap:break-word}
+.about__copy{overflow-wrap:break-word}
 html.js .about__word{color:var(--muted)}
 .about__footer{z-index:4;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:28px;min-height:46px;display:grid;position:relative}
 .about__footer-line{height:1px;transform:scaleX(var(--p));transform-origin:0;background:#11111129}
@@ -258,7 +258,7 @@ section{scroll-margin-top:70px}
 .hero h1{font-size:clamp(46px,13.6vw,84px)}
 .hero .wrap{width:calc(100% - 40px)}
 .about__sticky{padding-top:96px}
-.about__copy{font-size:clamp(2.1rem,10.4vw,3.4rem)}
+.about__copy{font-size:clamp(46px,13.6vw,84px);font-weight:900;letter-spacing:-.028em;text-transform:uppercase;line-height:.86}
 .about__footer{gap:14px}
 .about-extra{padding:10px 0 90px}
 .work{padding:84px 20px 100px}
@@ -279,7 +279,7 @@ section{scroll-margin-top:70px}
 .step h3,.step p{overflow-wrap:break-word;min-width:0}
 .contact__sticky{padding:96px 20px 20px}
 .contact h2{font-size:clamp(2.4rem,11.8vw,4.6rem);overflow-wrap:break-word}
-.about__copy{font-size:clamp(2.1rem,10.4vw,3.4rem);overflow-wrap:break-word;word-break:break-word}
+.about__copy{font-size:clamp(46px,13.6vw,84px);overflow-wrap:break-word;word-break:break-word}
 .tg-pill{margin-top:44px;min-height:76px;font-size:17px}
 .contact__footer{flex-wrap:wrap;gap:10px}
 }
@@ -444,9 +444,9 @@ requestAnimationFrame(tickLoader);
 const finishLoader=()=>{
 progress=100;counter.textContent='100';bar.style.transform='scaleX(1)';
 loader.setAttribute('aria-valuenow','100');
-loader.dataset.phase='exiting';
+loader.style.transform='translateY(-100%)';
 doc.dataset.siteLoading='false';
-setTimeout(()=>loader.dataset.phase='done',900);
+setTimeout(()=>{loader.style.display='none';loader.dataset.phase='done'},800);
 };
 if(reduced.matches){progress=100;finishLoader()}else{requestAnimationFrame(tickLoader)}
 
